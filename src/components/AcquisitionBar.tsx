@@ -29,6 +29,8 @@ import {
 import confetti from 'canvas-confetti';
 import { useLanguage } from '@/context/LanguageContext';
 import { TRANSLATIONS } from '@/data/translations';
+import { FORM_BRANDS as BRANDS } from '@/data/brands';
+import { getModelsForBrand } from '@/data/models';
 
 interface UploadedPhoto {
   id: string;
@@ -42,6 +44,7 @@ interface VehicleFormData {
   brand: string;
   customBrand: string;
   model: string;
+  customModel: string;
   year: string;
   customYear: string;
 
@@ -68,23 +71,6 @@ interface VehicleFormData {
   notes: string;
 }
 
-const BRANDS = [
-  'Toyota',
-  'Porsche',
-  'BMW',
-  'Mercedes-Benz',
-  'Audi',
-  'Tesla',
-  'Lexus',
-  'Land Rover',
-  'Ford',
-  'Honda',
-  'Hyundai',
-  'Kia',
-  'Chevrolet',
-  'Volkswagen',
-  'Other',
-];
 
 const YEARS = ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', 'Other'];
 const TRANSMISSIONS = ['Automatic', 'Manual', 'Dual-Clutch / PDK', 'Other'];
@@ -124,6 +110,7 @@ export default function AcquisitionBar() {
     brand: '',
     customBrand: '',
     model: '',
+    customModel: '',
     year: '',
     customYear: '',
 
@@ -217,6 +204,7 @@ export default function AcquisitionBar() {
       brand: '',
       customBrand: '',
       model: '',
+      customModel: '',
       year: '',
       customYear: '',
 
@@ -243,7 +231,9 @@ export default function AcquisitionBar() {
   };
 
   const displayBrand = formData.brand === 'Other' ? formData.customBrand : formData.brand;
+  const displayModel = formData.model === 'Other' ? formData.customModel : formData.model;
   const displayYear = formData.year === 'Other' ? formData.customYear : formData.year;
+  const brandModels = getModelsForBrand(formData.brand);
 
   return (
     <div
@@ -365,7 +355,7 @@ export default function AcquisitionBar() {
                       }}
                     >
                       <span>
-                        <strong>{t.confirmation.vehicleLabel}</strong> {[displayYear, displayBrand, formData.model].filter(Boolean).join(' ') || (language === 'DE' ? 'Standardbewertung' : 'Standard Appraisal')}
+                        <strong>{t.confirmation.vehicleLabel}</strong> {[displayYear, displayBrand, displayModel].filter(Boolean).join(' ') || (language === 'DE' ? 'Standardbewertung' : 'Standard Appraisal')}
                       </span>
                       {formData.priceMin || formData.priceMax ? (
                         <>
@@ -445,7 +435,16 @@ export default function AcquisitionBar() {
                                 <Car size={16} color="#6B7280" />
                                 <select
                                   value={formData.brand}
-                                  onChange={(e) => updateField('brand', e.target.value)}
+                                  onChange={(e) => {
+                                    const nextBrand = e.target.value;
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      brand: nextBrand,
+                                      model: '',
+                                      customModel: '',
+                                    }));
+                                    setErrorMessage(null);
+                                  }}
                                   className="inner-field-element"
                                   style={{ color: formData.brand ? '#111827' : '#9CA3AF' }}
                                 >
@@ -476,14 +475,47 @@ export default function AcquisitionBar() {
                             <div>
                               <div className="field-label">{t.step1.modelLabel}</div>
                               <div className="constant-input-box">
-                                <input
-                                  type="text"
-                                  placeholder={t.step1.modelPlaceholder}
-                                  value={formData.model}
-                                  onChange={(e) => updateField('model', e.target.value)}
-                                  className="inner-field-element"
-                                />
+                                {brandModels.length > 0 ? (
+                                  <select
+                                    value={formData.model}
+                                    onChange={(e) => updateField('model', e.target.value)}
+                                    className="inner-field-element"
+                                    style={{ color: formData.model ? '#111827' : '#9CA3AF' }}
+                                  >
+                                    <option value="" disabled>
+                                      {language === 'DE' ? 'Modell auswählen...' : 'Select model...'}
+                                    </option>
+                                    {brandModels.map((m) => (
+                                      <option key={m} value={m} style={{ color: '#111827' }}>
+                                        {m}
+                                      </option>
+                                    ))}
+                                    <option value="Other" style={{ color: '#111827' }}>
+                                      {language === 'DE' ? 'Sonstige' : 'Other'}
+                                    </option>
+                                  </select>
+                                ) : (
+                                  <input
+                                    type="text"
+                                    placeholder={t.step1.modelPlaceholder}
+                                    value={formData.model}
+                                    onChange={(e) => updateField('model', e.target.value)}
+                                    className="inner-field-element"
+                                  />
+                                )}
                               </div>
+                              {brandModels.length > 0 && formData.model === 'Other' && (
+                                <div className="constant-input-box" style={{ marginTop: '8px' }}>
+                                  <input
+                                    type="text"
+                                    placeholder={language === 'DE' ? 'Modellbezeichnung angeben' : 'Specify model name'}
+                                    value={formData.customModel}
+                                    onChange={(e) => updateField('customModel', e.target.value)}
+                                    className="inner-field-element"
+                                    autoFocus
+                                  />
+                                </div>
+                              )}
                             </div>
 
                             {/* Year */}

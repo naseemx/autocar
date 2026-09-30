@@ -6,6 +6,8 @@ import { X, Calculator, ShieldCheck, CheckCircle2, TrendingUp } from 'lucide-rea
 import confetti from 'canvas-confetti';
 import { useLanguage } from '@/context/LanguageContext';
 import { TRANSLATIONS } from '@/data/translations';
+import { BRANDS } from '@/data/brands';
+import { getModelsForBrand } from '@/data/models';
 
 interface ValueCalculatorModalProps {
   isOpen: boolean;
@@ -121,15 +123,21 @@ export default function ValueCalculatorModal({ isOpen, onClose }: ValueCalculato
                   </label>
                   <select
                     value={make}
-                    onChange={(e) => setMake(e.target.value)}
+                    onChange={(e) => {
+                      const nextMake = e.target.value;
+                      setMake(nextMake);
+                      const nextModels = getModelsForBrand(nextMake);
+                      if (nextModels.length > 0) {
+                        setModel(nextModels[0]);
+                      }
+                    }}
                     className="calc-input"
                   >
-                    <option>Toyota</option>
-                    <option>Mercedes-Benz</option>
-                    <option>Porsche</option>
-                    <option>Tesla</option>
-                    <option>Audi</option>
-                    <option>Subaru</option>
+                    {BRANDS.map((b) => (
+                      <option key={b} value={b}>
+                        {b}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -141,10 +149,17 @@ export default function ValueCalculatorModal({ isOpen, onClose }: ValueCalculato
                   </label>
                   <input
                     type="text"
+                    list="calc-modal-models"
                     value={model}
                     onChange={(e) => setModel(e.target.value)}
                     className="calc-input"
+                    placeholder={getModelsForBrand(make)[0] || 'Model name'}
                   />
+                  <datalist id="calc-modal-models">
+                    {getModelsForBrand(make).map((m) => (
+                      <option key={m} value={m} />
+                    ))}
+                  </datalist>
                 </div>
 
                 <div>

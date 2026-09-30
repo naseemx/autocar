@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Car,
   Truck,
-  ShieldCheck,
   Zap,
   Calendar,
   Gauge,
@@ -260,9 +259,6 @@ export default function AcquisitionBar() {
               <div className="top-bar-row">
                 {/* Title */}
                 <div>
-                  <div className="card-badge">
-                    <ShieldCheck size={13} color="#ff8f00" /> {t.badge}
-                  </div>
                   <h2 className="card-heading">
                     {t.title}
                   </h2>
@@ -1012,21 +1008,6 @@ export default function AcquisitionBar() {
           margin-bottom: 20px;
           padding-bottom: 16px;
           border-bottom: 1px solid #F1F5F9;
-        }
-
-        .card-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          fontSize: 11px;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          color: #ff8f00;
-          background-color: #FFF5E6;
-          padding: 3px 10px;
-          border-radius: 9999px;
-          margin-bottom: 6px;
         }
 
         .card-heading {

@@ -1,0 +1,261 @@
+:root {
+  --primary-blue: #002f61;
+  --primary-blue-hover: #002247;
+  --primary-blue-light: #EBF2FA;
+  --brand-orange: #ff8f00;
+  --brand-orange-hover: #e68000;
+  --brand-orange-light: #FFF5E6;
+  --brand-accent: #ff8f00;
+  --primary-dark: #0B0D12;
+  --primary-dark-surface: #131722;
+  --primary-dark-card: #161B26;
+  --primary-dark-border: rgba(255, 255, 255, 0.12);
+  
+  --bg-page: #F6F7F9;
+  --surface-white: #FFFFFF;
+  --surface-gray: #F2F4F7;
+  --surface-card-hover: #FAFBFC;
+  
+  --text-primary: #0C0F17;
+  --text-secondary: #4B5565;
+  --text-muted: #6B7280;
+  --text-light: #FFFFFF;
+  --text-light-muted: rgba(255, 255, 255, 0.72);
+  
+  --border-light: #E5E7EB;
+  --border-subtle: #ECEEF2;
+  
+  --shadow-soft: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+  --shadow-float: 0 20px 45px -10px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-elevated: 0 24px 50px -12px rgba(11, 13, 18, 0.35);
+  
+  --radius-hero: 32px;
+  --radius-floating: 24px;
+  --radius-card: 22px;
+  --radius-pill: 9999px;
+  
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+input, select {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.container-app {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .container-app {
+    padding: 0 16px;
+  }
+}
+
+/* Base Pill Button */
+.btn-pill-blue {
+  background: var(--primary-blue);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-pill-blue:hover {
+  background: var(--primary-blue-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 47, 97, 0.32);
+}
+
+.btn-pill-orange {
+  background: var(--brand-orange);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-pill-orange:hover {
+  background: var(--brand-orange-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255, 143, 0, 0.36);
+}
+
+.btn-pill-white {
+  background: #ffffff;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.btn-pill-white:hover {
+  background: #F0F2F5;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Circular Arrow Navigation Buttons (as seen in screenshots 1, 3, 4) */
+.nav-arrow-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.nav-arrow-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.nav-arrow-btn-light {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  background: #ffffff;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.nav-arrow-btn-light:hover {
+  background: var(--surface-gray);
+  border-color: #D1D5DB;
+  transform: scale(1.05);
+}
+
+.nav-arrow-btn-dark {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #0B0D12;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.nav-arrow-btn-dark:hover {
+  background: #1F2430;
+  transform: scale(1.05);
+}
+
+/* Category Filter Tags */
+.filter-tag-pill {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 9px 18px;
+  border-radius: 8px;
+  background: #E8EDF5;
+  color: #4B5565;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.filter-tag-pill:hover {
+  background: #DCE3F0;
+  color: #1E293B;
+}
+
+.filter-tag-pill.active {
+  background: var(--primary-blue);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 47, 97, 0.25);
+}
+
+/* Micro-animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scrollbar polish */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #c5c9d1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a6b2;
+}

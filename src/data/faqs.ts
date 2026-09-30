@@ -42,13 +42,13 @@ export const FAQ_ITEMS: FaqItem[] = [
     questionDe: 'KANN ICH EIN AUTO MIT MOTOR-, GETRIEBE- ODER UNFALLSCHADEN VERKAUFEN?',
     questionUk: 'ЧИ МОЖНА ПРОДАТИ АВТО З ПОШКОДЖЕНИМ ДВИГУНОМ АБО ПІСЛЯ ДТП?',
     answer: [
-      'Yes, absolutely! Autoankauf Köln specializes in purchasing vehicles with engine failure, gearbox issues, and collision damage.',
-      'We evaluate your vehicle honestly and transparently based on actual market value and international export demand.',
+      'Yes, absolutely! Autoankauf Köln specializes in accident-damaged car purchasing and seamless solutions when you need to sell a car with engine failure.',
+      'Even if you need a specialized car buying service (no valid inspection) with expired TÜV, our international car export purchasing network ensures an honest, top valuation.',
       'You avoid high upfront repair shop bills and lengthy disputes over repair estimates.',
     ],
     answerDe: [
-      'Ja, absolut! Autoankauf Köln ist auf den Ankauf von Fahrzeugen mit Motorschaden, Getriebedefekten und Unfallschäden spezialisiert.',
-      'Wir bewerten Ihr Auto ehrlich und transparent auf Basis des tatsächlichen Restwerts und der internationalen Exportnachfrage.',
+      'Ja, absolut! Autoankauf Köln ist auf den Unfallwagen Ankauf spezialisiert und bietet faire Lösungen, wenn Sie ein Auto mit Motorschaden verkaufen möchten.',
+      'Selbst wenn Sie einen Autoankauf ohne TÜV (ohne gültige Hauptuntersuchung) benötigen, sichert unser Netzwerk für den Autoexport Ankauf beste Konditionen.',
       'Sie sparen sich teure Werkstattreparaturen und langwierigen Ärger mit Kostenvoranschlägen.',
     ],
     answerUk: [
@@ -66,12 +66,12 @@ export const FAQ_ITEMS: FaqItem[] = [
     answer: [
       'We collect your vehicle in Cologne and across NRW directly at your doorstep 100% free of charge.',
       'Our team verifies the car on-site and issues a legally binding, safe purchase contract (Kaufvertrag).',
-      'You receive your money immediately upon key handover — either in cash on the spot or via instant real-time bank transfer.',
+      'You receive your money immediately upon key handover — whether you choose to sell your car for cash on the spot or via instant real-time bank transfer.',
     ],
     answerDe: [
       'Wir holen Ihr Fahrzeug in ganz Köln und NRW direkt vor Ihrer Haustür zu 100% kostenlos ab.',
       'Unser geschultes Team prüft das Auto vor Ort und erstellt einen rechtssicheren Kaufvertrag.',
-      'Sie erhalten Ihr Geld unmittelbar bei der Schlüsselübergabe – wahlweise bar vor Ort oder per Echtzeit-Banküberweisung.',
+      'Sie erhalten Ihr Geld unmittelbar bei der Schlüsselübergabe – wahlweise können Sie Ihr Auto gegen Barzahlung verkaufen oder per Echtzeit-Banküberweisung.',
     ],
     answerUk: [
       'Ми забираємо ваше авто в Кельні та по всій землі Північний Рейн-Вестфалія прямо від вашого будинку абсолютно безкоштовно.',
@@ -108,12 +108,12 @@ export const FAQ_ITEMS: FaqItem[] = [
     questionDe: 'GIBT ES VERSTECKTE KOSTEN ODER UNVERBINDLICHE "BIS-ZU"-LOCKPREISE?',
     questionUk: 'ЧИ Є ПРИХОВАНІ ПЛАТЕЖІ АБО МАРКЕТИНГОВІ «ДО» ЦІНИ?',
     answer: [
-      'None at all. Unlike platforms like wirkaufendeinauto, Autoankauf Köln provides clear, concrete offers from the start.',
+      'None at all. As a reputable local car buying service, Autoankauf Köln provides clear, concrete offers from the start for passenger car purchasing and used car purchasing.',
       'Our valuation is 100% free and non-binding, with zero handling fees or surprise deductions upon collection.',
       'As a private seller, you sell with peace of mind without any warranty liabilities (Ausschluss der Sachmängelhaftung).',
     ],
     answerDe: [
-      'Überhaupt keine. Im Gegensatz zu Plattformen wie wirkaufendeinauto gibt Autoankauf Köln von Beginn an verbindliche Festangebote.',
+      'Überhaupt keine. Als seriöser lokaler Autoankauf Service bietet Autoankauf Köln von Beginn an verbindliche Festpreise für den PKW Ankauf und Gebrauchtwagenankauf.',
       'Unsere Bewertung ist 100% kostenlos und unverbindlich – ohne Servicegebühren oder nachträgliche Abzüge bei der Abholung.',
       'Als Privatverkäufer verkaufen Sie vollkommen risikofrei ohne jede Gewährleistungshaftung.',
     ],

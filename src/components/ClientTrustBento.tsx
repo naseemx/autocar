@@ -2,11 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 import { ArrowUpRight, Banknote, MapPin, AlertTriangle, Clock, ShieldCheck, ThumbsUp } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useLocation } from '@/context/LocationContext';
 import { TRANSLATIONS } from '@/data/translations';
 
 export default function ClientTrustBento() {
   const { language } = useLanguage();
+  const { displayLocation } = useLocation();
   const t = TRANSLATIONS[language].clientTrustBento;
+  const brandInitials = displayLocation ? `A${displayLocation.charAt(0).toUpperCase()}` : 'AK';
   return (
     <section
       id="why-trust-us"
@@ -509,7 +512,7 @@ export default function ClientTrustBento() {
                     boxShadow: '0 2px 8px rgba(255, 143, 0, 0.4)',
                   }}
                 >
-                  AK
+                  {brandInitials}
                 </div>
                 <span
                   style={{
@@ -519,7 +522,7 @@ export default function ClientTrustBento() {
                     color: '#FFFFFF',
                   }}
                 >
-                  Autoankauf <span style={{ color: '#ff8f00' }}>Köln</span>
+                  Autoankauf <span style={{ color: '#ff8f00' }}>{displayLocation}</span>
                 </span>
               </div>
 
@@ -630,7 +633,7 @@ export default function ClientTrustBento() {
             }}
             aria-hidden="true"
           >
-            AUTOANKAUF KÖLN
+            AUTOANKAUF {displayLocation.toUpperCase()}
           </div>
 
           {/* Foreground Centered Text */}
@@ -646,7 +649,7 @@ export default function ClientTrustBento() {
               fontWeight: 450,
             }}
           >
-            We built a service where every single detail works for your comfort and confidence. Experience how effortlessly and quickly you can sell your vehicle in Cologne & throughout NRW without dealer games or hidden clauses.
+            {t.footerNote}
           </p>
         </div>
       </div>

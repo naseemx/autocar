@@ -42,7 +42,7 @@ export default function BrandLogo({
           letterSpacing: '-0.035em',
         }}
       >
-        kauf-auto
+        Autoankauf
       </span>
       <span
         style={{

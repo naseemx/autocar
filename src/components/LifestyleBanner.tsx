@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useLocation } from '@/context/LocationContext';
 import { TRANSLATIONS } from '@/data/translations';
 
 interface LifestyleBannerProps {
@@ -12,6 +13,7 @@ interface LifestyleBannerProps {
 
 export default function LifestyleBanner({ onOpenInventory }: LifestyleBannerProps) {
   const { language } = useLanguage();
+  const { displayLocation, locationConfig } = useLocation();
   const t = TRANSLATIONS[language].lifestyleBanner;
 
   const handleClick = () => {
@@ -152,7 +154,7 @@ export default function LifestyleBanner({ onOpenInventory }: LifestyleBannerProp
             }}>
               <Image
                 src="https://res.cloudinary.com/dymoyukvh/image/upload/v1790760664/kauf-auto/images/badge-van.jpg"
-                alt="Free doorstep vehicle pickup in Cologne & NRW"
+                alt={`Free doorstep vehicle pickup in ${displayLocation} & ${locationConfig.region}`}
                 fill
                 sizes="100px"
                 style={{ objectFit: 'cover' }}

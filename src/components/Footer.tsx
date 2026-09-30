@@ -4,11 +4,13 @@ import React from 'react';
 import Link from 'next/link';
 import { MapPin, Phone, Mail, ArrowUp } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useLocation } from '@/context/LocationContext';
 import BrandLogo from '@/components/BrandLogo';
 import { TRANSLATIONS } from '@/data/translations';
 
 export default function Footer() {
   const { language } = useLanguage();
+  const { displayLocation, locationConfig } = useLocation();
   const t = TRANSLATIONS[language].footer;
 
   const scrollToTop = () => {
@@ -389,7 +391,7 @@ export default function Footer() {
               textTransform: 'uppercase',
             }}
           >
-            AUTOANKAUF KÖLN
+            AUTOANKAUF {displayLocation.toUpperCase()}
           </div>
 
           {/* Bottom Copyright & Back-to-Top Bar */}
@@ -413,7 +415,7 @@ export default function Footer() {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
               <span style={{ fontSize: '12px', color: '#6B7280' }}>
-                Autoankauf Köln • Vor Ort in ganz NRW
+                {locationConfig.brandName} • {t.statusActive}
               </span>
 
               <button

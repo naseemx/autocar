@@ -1,19 +1,59 @@
 import type { Metadata } from "next";
+import { headers, cookies } from "next/headers";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { LocationProvider } from "@/context/LocationContext";
+import { resolveLocation } from "@/utils/domainResolver";
 
-export const metadata: Metadata = {
-  title: "Autoankauf Köln | Auto verkaufen in Köln & NRW zum Bestpreis",
-  description: "Auto verkaufen in Köln leicht gemacht: Bei Autoankauf Köln erhalten Sie den besten Preis für Ihren Gebrauchtwagen, Unfallwagen oder Motorschaden mit kostenloser Haustür-Abholung in ganz Köln & NRW.",
-  keywords: ["Auto verkaufen Köln", "Autoankauf Köln", "Gebrauchtwagen Ankauf Köln", "Auto mit Motorschaden verkaufen Köln", "Unfallwagen Ankauf Köln", "Autoankauf NRW", "autoankauf-koeln", "autoankauf koeln"],
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const cookieStore = await cookies();
+  const host =
+    headersList.get("x-current-domain") ||
+    headersList.get("x-forwarded-host") ||
+    headersList.get("host") ||
+    "autoankauf-in-koeln.de";
+  const locationSlug =
+    headersList.get("x-location-slug") ||
+    cookieStore.get("site_location")?.value;
 
-export default function RootLayout({
+  const loc = resolveLocation(host, locationSlug);
+
+  return {
+    title: `Autoankauf ${loc.name} | Auto verkaufen in ${loc.name} zum Bestpreis`,
+    description: `Auto verkaufen in ${loc.name} leicht gemacht: Bei Autoankauf ${loc.name} erhalten Sie den besten Preis für Ihren Gebrauchtwagen, Unfallwagen oder Motorschaden mit kostenloser Haustür-Abholung in ganz ${loc.name} & Umgebung.`,
+    keywords: loc.seoKeywords,
+    alternates: {
+      canonical: loc.canonicalUrl,
+    },
+    openGraph: {
+      title: `Autoankauf ${loc.name} | Auto verkaufen in ${loc.name}`,
+      description: `Verkaufen Sie Ihr Auto direkt in ${loc.name} und Umgebung zum Bestpreis mit Sofortauszahlung.`,
+      url: loc.canonicalUrl,
+      siteName: `Autoankauf ${loc.name}`,
+      locale: "de_DE",
+      type: "website",
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = await headers();
+  const cookieStore = await cookies();
+  const host =
+    headersList.get("x-current-domain") ||
+    headersList.get("x-forwarded-host") ||
+    headersList.get("host") ||
+    "autoankauf-in-koeln.de";
+  const locationSlug =
+    headersList.get("x-location-slug") ||
+    cookieStore.get("site_location")?.value;
+  const loc = resolveLocation(host, locationSlug);
+
   return (
     <html lang="de">
       <head>
@@ -23,6 +63,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
+        <link rel="canonical" href={loc.canonicalUrl} />
         <style dangerouslySetInnerHTML={{
           __html: `
             :root {
@@ -33,7 +74,7 @@ export default function RootLayout({
       </head>
       <body>
         <LanguageProvider>
-          <LocationProvider>
+          <LocationProvider initialLocation={loc}>
             {children}
           </LocationProvider>
         </LanguageProvider>

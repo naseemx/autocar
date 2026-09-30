@@ -1,44 +1,87 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { LocationConfig, DEFAULT_LOCATION_CONFIG, resolveLocation } from '@/utils/domainResolver';
 
 interface LocationContextType {
+  locationConfig: LocationConfig;
   selectedLocation: string;
   setSelectedLocation: (location: string) => void;
   displayLocation: string;
+  canonicalUrl: string;
+  domain: string;
+  keywordsEn: string[];
+  keywordsDe: string[];
 }
 
 const LocationContext = createContext<LocationContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'kauf_auto_selected_location';
-const DEFAULT_LOCATION = 'Köln';
 
-export function LocationProvider({ children }: { children: ReactNode }) {
-  const [selectedLocation, setSelectedLocationState] = useState<string>(DEFAULT_LOCATION);
+// Module-level reference for direct translation lookups outside hooks
+let currentActiveLocationConfig: LocationConfig = DEFAULT_LOCATION_CONFIG;
+
+export function getActiveLocationConfig(): LocationConfig {
+  return currentActiveLocationConfig;
+}
+
+export function setActiveLocationConfig(config: LocationConfig) {
+  currentActiveLocationConfig = config;
+}
+
+interface LocationProviderProps {
+  children: ReactNode;
+  initialLocation?: LocationConfig;
+}
+
+export function LocationProvider({ children, initialLocation }: LocationProviderProps) {
+  const [locationConfig, setLocationConfig] = useState<LocationConfig>(() => {
+    return initialLocation || DEFAULT_LOCATION_CONFIG;
+  });
 
   useEffect(() => {
-    try {
-      // Force default location as place cannot be changed by user
-      setSelectedLocationState(DEFAULT_LOCATION);
-      localStorage.setItem(STORAGE_KEY, DEFAULT_LOCATION);
-    } catch {
-      // localStorage fallback
+    if (initialLocation) {
+      setLocationConfig(initialLocation);
+      setActiveLocationConfig(initialLocation);
+      return;
     }
-  }, []);
 
-  const setSelectedLocation = (_loc: string) => {
-    // Locked to default location
-    setSelectedLocationState(DEFAULT_LOCATION);
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      const params = new URLSearchParams(window.location.search);
+      const locationParam = params.get('location') || params.get('city') || localStorage.getItem(STORAGE_KEY);
+      const resolved = resolveLocation(hostname, locationParam);
+      setLocationConfig(resolved);
+      setActiveLocationConfig(resolved);
+    }
+  }, [initialLocation]);
+
+  const setSelectedLocation = (query: string) => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      const resolved = resolveLocation(hostname, query);
+      setLocationConfig(resolved);
+      setActiveLocationConfig(resolved);
+      try {
+        localStorage.setItem(STORAGE_KEY, resolved.slug);
+        document.cookie = `site_location=${resolved.slug};path=/;max-age=2592000;SameSite=Lax`;
+      } catch {
+        // storage fallback
+      }
+    }
   };
-
-  const displayLocation = DEFAULT_LOCATION;
 
   return (
     <LocationContext.Provider
       value={{
-        selectedLocation,
+        locationConfig,
+        selectedLocation: locationConfig.name,
         setSelectedLocation,
-        displayLocation,
+        displayLocation: locationConfig.name,
+        canonicalUrl: locationConfig.canonicalUrl,
+        domain: locationConfig.domain,
+        keywordsEn: locationConfig.keywordsEn,
+        keywordsDe: locationConfig.keywordsDe,
       }}
     >
       {children}
@@ -53,4 +96,3 @@ export function useLocation(): LocationContextType {
   }
   return context;
 }
-

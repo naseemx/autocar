@@ -41,11 +41,15 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
     <header
       style={{
         width: '100%',
-        backgroundColor: '#FFFFFF',
-        borderBottom: '1px solid var(--border-subtle)',
+        backgroundColor: 'rgba(255, 255, 255, 0.98)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        borderBottom: '1px solid rgba(226, 232, 240, 0.9)',
+        boxShadow: '0 4px 20px -4px rgba(15, 23, 42, 0.07)',
         position: 'sticky',
         top: 0,
-        zIndex: 50,
+        zIndex: 100,
+        transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
       }}
     >
       <div
@@ -278,6 +282,9 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             display: 'flex',
             flexDirection: 'column',
             gap: '14px',
+            maxHeight: 'calc(100vh - 76px)',
+            overflowY: 'auto',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)',
           }}
         >
           {/* Mobile Links */}

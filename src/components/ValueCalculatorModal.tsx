@@ -299,7 +299,7 @@ export default function ValueCalculatorModal({ isOpen, onClose }: ValueCalculato
           background-color: rgba(10, 12, 17, 0.75);
           backdrop-filter: blur(8px);
           -webkit-backdrop-filter: blur(8px);
-          z-index: 100;
+          z-index: 9999;
           display: flex;
           align-items: center;
           justify-content: center;

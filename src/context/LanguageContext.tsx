@@ -14,10 +14,10 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'kauf_auto_language';
+const STORAGE_KEY = 'kauf_auto_language_v2';
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('DE'); // German default for .de domain with easy EN switch
+  const [language, setLanguageState] = useState<Language>('DE'); // German default for Autoankauf Köln
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -26,13 +26,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       if (savedLang === 'EN' || savedLang === 'DE') {
         setLanguageState(savedLang);
       } else {
-        // Detect from browser navigator
-        const browserLang = navigator.language?.toLowerCase();
-        if (browserLang.startsWith('en')) {
-          setLanguageState('EN');
-        } else {
-          setLanguageState('DE');
-        }
+        // Default to German when website opens
+        setLanguageState('DE');
       }
     } catch {
       // localStorage unavailable fallback

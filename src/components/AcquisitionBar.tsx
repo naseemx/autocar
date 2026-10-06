@@ -25,6 +25,7 @@ import {
   Check,
   Building,
   RotateCcw,
+  Loader2,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useLanguage } from '@/context/LanguageContext';
@@ -36,6 +37,7 @@ interface UploadedPhoto {
   id: string;
   url: string;
   name: string;
+  file?: File;
 }
 
 interface VehicleFormData {
@@ -102,6 +104,7 @@ export default function AcquisitionBar() {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [submittedRef, setSubmittedRef] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Strictly NO prefilled / default values
@@ -144,9 +147,10 @@ export default function AcquisitionBar() {
     const files = e.target.files;
     if (!files || files.length === 0) return;
     const uploaded = Array.from(files).map((file, i) => ({
-      id: `${Date.now()}-${i}`,
+      id: `${Date.now()}-${i}-${Math.random().toString(36).substring(2, 6)}`,
       url: URL.createObjectURL(file),
       name: file.name,
+      file,
     }));
     setFormData((prev) => ({ ...prev, images: [...prev.images, ...uploaded] }));
   };
@@ -175,23 +179,84 @@ export default function AcquisitionBar() {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateCurrentStep()) return;
+    if (!validateCurrentStep() || isSubmitting) return;
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
 
     const ref = `ACQ-${Math.floor(1000 + Math.random() * 9000)}`;
-    setSubmittedRef(ref);
-    setIsSubmitted(true);
 
     try {
-      confetti({
-        particleCount: 90,
-        spread: 75,
-        origin: { y: 0.55 },
-        colors: ['#002f61', '#ff8f00', '#10B981'],
+      const payload = new FormData();
+      payload.append('reference', ref);
+      payload.append('vehicleType', formData.vehicleType || 'Cars');
+      payload.append('brand', formData.brand || '');
+      payload.append('customBrand', formData.customBrand || '');
+      payload.append('model', formData.model || '');
+      payload.append('customModel', formData.customModel || '');
+      payload.append('year', formData.year || '');
+      payload.append('customYear', formData.customYear || '');
+      payload.append('transmission', formData.transmission || '');
+      payload.append('customTransmission', formData.customTransmission || '');
+      payload.append('fuelType', formData.fuelType || '');
+      payload.append('customFuelType', formData.customFuelType || '');
+      payload.append('performance', formData.performance || '');
+      payload.append('mileage', formData.mileage || '');
+      payload.append('seats', formData.seats || '');
+      payload.append('doors', formData.doors || '');
+      payload.append('ownerName', formData.ownerName || '');
+      payload.append('ownerPhone', formData.ownerPhone || '');
+      payload.append('ownerEmail', formData.ownerEmail || '');
+      payload.append('priceMin', formData.priceMin || '');
+      payload.append('priceMax', formData.priceMax || '');
+      payload.append('ownerCity', formData.ownerCity || '');
+      payload.append('ownerAddress', formData.ownerAddress || '');
+      payload.append('ownerPostalCode', formData.ownerPostalCode || '');
+      payload.append('notes', formData.notes || '');
+
+      formData.images.forEach((img) => {
+        if (img.file) {
+          payload.append('images', img.file);
+        }
       });
-    } catch {
-      // safe fallback
+
+      const response = await fetch('/api/acquisition', {
+        method: 'POST',
+        body: payload,
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Submission failed');
+      }
+
+      setSubmittedRef(data.reference || ref);
+      setIsSubmitted(true);
+
+      try {
+        confetti({
+          particleCount: 90,
+          spread: 75,
+          origin: { y: 0.55 },
+          colors: ['#002f61', '#ff8f00', '#10B981'],
+        });
+      } catch {
+        // safe fallback
+      }
+    } catch (err: unknown) {
+      console.error('Submission error:', err);
+      const customMsg = err instanceof Error ? err.message : null;
+      setErrorMessage(
+        customMsg ||
+          (language === 'DE'
+            ? 'Fehler beim Übertragen der Daten. Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut.'
+            : 'Error submitting details. Please check your connection and try again.')
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -995,9 +1060,25 @@ export default function AcquisitionBar() {
                     <button
                       type="button"
                       onClick={handleSubmit}
+                      disabled={isSubmitting}
                       className="btn-pill-blue form-action-btn"
+                      style={{
+                        opacity: isSubmitting ? 0.8 : 1,
+                        cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                      }}
                     >
-                      {t.buttons.submit}
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" />
+                          <span>{language === 'DE' ? 'Wird übertragen...' : 'Submitting...'}</span>
+                        </>
+                      ) : (
+                        t.buttons.submit
+                      )}
                     </button>
                   )}
                 </div>

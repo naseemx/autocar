@@ -35,10 +35,10 @@ export const KNOWN_DOMAINS: Record<string, { city: string; cityEn: string; regio
     regionEn: 'Hamburg and surrounding area',
   },
   'autoankaufcolonia.de': {
-    city: 'Köln',
-    cityEn: 'Cologne',
-    region: 'Köln & NRW',
-    regionEn: 'Cologne & NRW',
+    city: 'Colonia',
+    cityEn: 'Colonia',
+    region: 'Köln, Bonn & NRW',
+    regionEn: 'Cologne, Bonn & NRW',
   },
   'autoankauf-in-koeln.de': {
     city: 'Köln',
@@ -284,8 +284,31 @@ export function resolveLocation(host?: string | null, locationParam?: string | n
 
   // 3. Check if hostname contains any city slug or name
   if (cleanHost) {
-    // Check specific known patterns: e.g. "colonia" -> Cologne
-    if (cleanHost.includes('colonia') || cleanHost.includes('koeln') || cleanHost.includes('cologne')) {
+    // Check specific known patterns: e.g. "colonia" -> Colonia / Cologne
+    if (cleanHost.includes('colonia')) {
+      const kwColonia = generateLocationKeywords('Colonia', 'Colonia');
+      const kwKoeln = generateLocationKeywords('Köln', 'Cologne');
+      const combinedDe = Array.from(new Set([...kwColonia.de, ...kwKoeln.de]));
+      const combinedEn = Array.from(new Set([...kwColonia.en, ...kwKoeln.en]));
+      return {
+        name: 'Colonia',
+        nameEn: 'Colonia',
+        slug: 'koeln',
+        region: 'Köln, Bonn & NRW',
+        regionEn: 'Cologne, Bonn & NRW',
+        domain: cleanHost,
+        canonicalUrl: `https://${cleanHost}`,
+        brandName: 'Autoankauf Colonia',
+        brandLogoLocation: 'Colonia',
+        phone: '+49 (0) 800 550 0008',
+        email: `kontakt@${cleanHost}`,
+        keywordsEn: combinedEn,
+        keywordsDe: combinedDe,
+        seoKeywords: [...combinedDe, ...combinedEn],
+      };
+    }
+
+    if (cleanHost.includes('koeln') || cleanHost.includes('cologne')) {
       const kw = generateLocationKeywords('Köln', 'Cologne');
       return {
         name: 'Köln',

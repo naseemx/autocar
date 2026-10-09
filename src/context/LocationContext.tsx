@@ -36,7 +36,9 @@ interface LocationProviderProps {
 
 export function LocationProvider({ children, initialLocation }: LocationProviderProps) {
   const [locationConfig, setLocationConfig] = useState<LocationConfig>(() => {
-    return initialLocation || DEFAULT_LOCATION_CONFIG;
+    const config = initialLocation || DEFAULT_LOCATION_CONFIG;
+    setActiveLocationConfig(config);
+    return config;
   });
 
   useEffect(() => {

@@ -74,7 +74,13 @@ interface VehicleFormData {
 }
 
 
-const YEARS = ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', 'Other'];
+const CURRENT_YEAR = new Date().getFullYear();
+const MAX_YEAR = Math.max(CURRENT_YEAR + 1, 2026);
+const MIN_YEAR = 1900;
+const YEARS = [
+  ...Array.from({ length: MAX_YEAR - MIN_YEAR + 1 }, (_, i) => String(MAX_YEAR - i)),
+  'Other',
+];
 const TRANSMISSIONS = ['Automatic', 'Manual', 'Dual-Clutch / PDK', 'Other'];
 const FUEL_TYPES = ['Petrol / Gasoline', 'Hybrid (HEV)', 'Plug-in Hybrid (PHEV)', '100% Electric (EV)', 'Diesel', 'Other'];
 const RECOMMENDED_SEATS = ['2', '4', '5', '7', '8'];
@@ -196,7 +202,8 @@ export default function AcquisitionBar() {
       payload.append('customBrand', formData.customBrand || '');
       payload.append('model', formData.model || '');
       payload.append('customModel', formData.customModel || '');
-      payload.append('year', formData.year || '');
+      const resolvedYear = formData.year === 'Other' ? (formData.customYear || 'Other') : (formData.year || '');
+      payload.append('year', resolvedYear);
       payload.append('customYear', formData.customYear || '');
       payload.append('transmission', formData.transmission || '');
       payload.append('customTransmission', formData.customTransmission || '');

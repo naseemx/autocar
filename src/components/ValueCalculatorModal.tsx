@@ -14,6 +14,11 @@ interface ValueCalculatorModalProps {
   onClose: () => void;
 }
 
+const CURRENT_YEAR = new Date().getFullYear();
+const MAX_YEAR = Math.max(CURRENT_YEAR + 1, 2026);
+const MIN_YEAR = 1900;
+const YEARS = Array.from({ length: MAX_YEAR - MIN_YEAR + 1 }, (_, i) => String(MAX_YEAR - i));
+
 export default function ValueCalculatorModal({ isOpen, onClose }: ValueCalculatorModalProps) {
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].calculator;
@@ -109,11 +114,11 @@ export default function ValueCalculatorModal({ isOpen, onClose }: ValueCalculato
                     onChange={(e) => setYear(e.target.value)}
                     className="calc-input"
                   >
-                    <option>2024</option>
-                    <option>2023</option>
-                    <option>2022</option>
-                    <option>2021</option>
-                    <option>2020</option>
+                    {YEARS.map((y) => (
+                      <option key={y} value={y}>
+                        {y}
+                      </option>
+                    ))}
                   </select>
                 </div>
 

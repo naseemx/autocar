@@ -82,7 +82,7 @@ export function getTranslations(lang: Language, customLoc?: LocationConfig) {
           modelPlaceholder: 'e.g. RAV4 Hybrid, 911, Model Y',
           yearLabel: 'MANUFACTURE YEAR',
           yearPlaceholder: 'Select year...',
-          customYearPlaceholder: 'Specify year (e.g. 1999)',
+          customYearPlaceholder: 'Specify year (e.g. 1898 or custom)',
         },
         step2: {
           transmissionLabel: 'TRANSMISSION',
@@ -446,7 +446,7 @@ export function getTranslations(lang: Language, customLoc?: LocationConfig) {
         modelPlaceholder: 'z.B. Golf VII, 320d, C-Klasse',
         yearLabel: 'ERSTZULASSUNG (BAUJAHR)',
         yearPlaceholder: 'Baujahr auswählen...',
-        customYearPlaceholder: 'Baujahr angeben (z.B. 2012)',
+        customYearPlaceholder: 'Baujahr angeben (z.B. 1898 oder Sonderbaujahr)',
       },
       step2: {
         transmissionLabel: 'GETRIEBE',

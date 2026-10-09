@@ -42,7 +42,9 @@ export async function POST(request: Request) {
     const vehicleType = (formData.get('vehicleType') as string) || 'Auto';
     const brand = (formData.get('brand') as string) || (formData.get('customBrand') as string) || '-';
     const model = (formData.get('model') as string) || (formData.get('customModel') as string) || '-';
-    const year = (formData.get('year') as string) || (formData.get('customYear') as string) || '-';
+    const rawYear = (formData.get('year') as string) || '';
+    const customYear = (formData.get('customYear') as string) || '';
+    const year = (rawYear === 'Other' && customYear ? customYear : rawYear) || customYear || '-';
     const transmission = (formData.get('transmission') as string) || (formData.get('customTransmission') as string) || '-';
     const fuelType = (formData.get('fuelType') as string) || (formData.get('customFuelType') as string) || '-';
     const mileage = (formData.get('mileage') as string) || '-';

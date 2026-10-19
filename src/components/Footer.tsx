@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { MapPin, Phone, Mail, ArrowUp } from 'lucide-react';
+import { MapPin, Phone, ArrowUp } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useLocation } from '@/context/LocationContext';
 import BrandLogo from '@/components/BrandLogo';
@@ -224,7 +224,7 @@ export default function Footer() {
                     <Phone size={18} strokeWidth={2.4} />
                   </div>
                   <a
-                    href={`tel:${t.phone.replace(/[^0-9+]/g, '')}`}
+                    href="tel:+4915207107540"
                     className="footer-contact-link"
                     style={{
                       fontSize: '14px',
@@ -234,40 +234,7 @@ export default function Footer() {
                       transition: 'color 0.2s ease',
                     }}
                   >
-                    {t.phone}
-                  </a>
-                </div>
-
-                {/* 3. Email */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <div
-                    style={{
-                      width: '38px',
-                      height: '38px',
-                      borderRadius: '50%',
-                      backgroundColor: '#ff8f00',
-                      color: '#0B0D12',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
-                      boxShadow: '0 4px 12px rgba(255, 143, 0, 0.25)',
-                    }}
-                  >
-                    <Mail size={18} strokeWidth={2.4} />
-                  </div>
-                  <a
-                    href={`mailto:${t.email}`}
-                    className="footer-contact-link"
-                    style={{
-                      fontSize: '14px',
-                      color: '#D1D5DB',
-                      fontWeight: 500,
-                      textDecoration: 'none',
-                      transition: 'color 0.2s ease',
-                    }}
-                  >
-                    {t.email}
+                    +4915207107540
                   </a>
                 </div>
               </div>
@@ -338,7 +305,7 @@ export default function Footer() {
 
                   {/* WhatsApp */}
                   <a
-                    href="https://wa.me/498005500008"
+                    href="https://wa.me/4915207107540"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="WhatsApp Business"

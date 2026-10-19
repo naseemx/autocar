@@ -1,9 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { headers, cookies } from "next/headers";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { LocationProvider } from "@/context/LocationContext";
 import { resolveLocation } from "@/utils/domainResolver";
+import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers();
@@ -76,6 +83,7 @@ export default async function RootLayout({
         <LanguageProvider>
           <LocationProvider initialLocation={loc}>
             {children}
+            <WhatsAppFloatingButton />
           </LocationProvider>
         </LanguageProvider>
       </body>

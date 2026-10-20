@@ -210,7 +210,7 @@ export default function ValueCalculatorModal({ isOpen, onClose }: ValueCalculato
 
               <button
                 type="submit"
-                className="btn-pill-blue"
+                className="btn-pill-orange"
                 style={{
                   padding: '14px',
                   fontSize: '15px',
@@ -288,7 +288,7 @@ export default function ValueCalculatorModal({ isOpen, onClose }: ValueCalculato
                     alert(t.alertSuccess);
                     onClose();
                   }}
-                  className="btn-pill-blue"
+                  className="btn-pill-orange"
                   style={{ flex: 1, padding: '13px', fontSize: '14px' }}
                 >
                   <ShieldCheck size={16} /> {t.requestOfferBtn}

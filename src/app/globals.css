@@ -45,11 +45,15 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   min-height: 100vh;
-  overflow-x: clip;
+  overflow-x: hidden;
+  max-width: 100%;
   background-color: var(--bg-page);
   color: var(--text-primary);
   font-family: var(--font-sans);

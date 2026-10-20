@@ -451,7 +451,7 @@ export default function AcquisitionBar() {
                       <button
                         type="button"
                         onClick={handleReset}
-                        className="btn-pill-blue confirmation-reset-btn"
+                        className="btn-pill-orange confirmation-reset-btn"
                       >
                         {t.buttons.submitAnother}
                       </button>
@@ -826,7 +826,7 @@ export default function AcquisitionBar() {
                               onClick={() => fileInputRef.current?.click()}
                               className="upload-dropzone"
                             >
-                              <UploadCloud size={18} color="#002f61" style={{ flexShrink: 0 }} />
+                              <UploadCloud size={18} color="#ff8f00" style={{ flexShrink: 0 }} />
                               <span className="upload-text">
                                 {t.step2.photosUploadText}
                               </span>
@@ -1059,7 +1059,7 @@ export default function AcquisitionBar() {
                     <button
                       type="button"
                       onClick={handleNext}
-                      className="btn-pill-blue form-action-btn"
+                      className="btn-pill-orange form-action-btn"
                     >
                       {t.buttons.next} <ArrowRight size={16} />
                     </button>
@@ -1068,7 +1068,7 @@ export default function AcquisitionBar() {
                       type="button"
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className="btn-pill-blue form-action-btn"
+                      className="btn-pill-orange form-action-btn"
                       style={{
                         opacity: isSubmitting ? 0.8 : 1,
                         cursor: isSubmitting ? 'not-allowed' : 'pointer',
@@ -1176,7 +1176,7 @@ export default function AcquisitionBar() {
         }
 
         .capsule-step-btn.active {
-          background-color: #002f61;
+          background-color: #ff8f00;
           color: #FFFFFF;
           font-weight: 700;
         }
@@ -1211,9 +1211,9 @@ export default function AcquisitionBar() {
         }
 
         .constant-input-box:focus-within {
-          border-color: #002f61;
+          border-color: #ff8f00;
           background-color: #FFFFFF;
-          box-shadow: 0 0 0 3px rgba(0, 47, 97, 0.08);
+          box-shadow: 0 0 0 3px rgba(255, 143, 0, 0.12);
         }
 
         /* Inner form input & select */
@@ -1268,10 +1268,15 @@ export default function AcquisitionBar() {
           cursor: pointer;
         }
 
+        .category-tab-btn:hover {
+          border-color: #ff8f00;
+          color: #ff8f00;
+        }
+
         .category-tab-btn.active {
-          background-color: #002f61;
+          background-color: #ff8f00;
           color: #FFFFFF;
-          border-color: #002f61;
+          border-color: #ff8f00;
         }
 
         .step-grid-3 {
@@ -1314,9 +1319,9 @@ export default function AcquisitionBar() {
 
         .rec-pill-btn.active {
           font-weight: 700;
-          background-color: #EEF2FF;
-          color: #002f61;
-          border-color: #93C5FD;
+          background-color: #FFF7ED;
+          color: #EA580C;
+          border-color: #FDBA74;
         }
 
         .upload-dropzone {
@@ -1336,8 +1341,8 @@ export default function AcquisitionBar() {
         }
 
         .upload-dropzone:hover {
-          border-color: #002f61;
-          background-color: #F0F6FF;
+          border-color: #ff8f00;
+          background-color: #FFF7ED;
         }
 
         .upload-text {
@@ -1568,37 +1573,48 @@ export default function AcquisitionBar() {
           .form-footer-row {
             margin-top: 14px !important;
             padding-top: 14px !important;
-            flex-direction: row !important;
-            align-items: center !important;
+            flex-direction: column-reverse !important;
+            align-items: stretch !important;
             gap: 10px !important;
           }
           .form-footer-left {
-            flex-shrink: 0;
+            width: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
           }
           .form-back-btn {
-            height: 44px !important;
-            padding: 0 14px !important;
+            height: 42px !important;
+            padding: 0 16px !important;
             background-color: #F1F5F9 !important;
             border-radius: 9999px !important;
             font-size: 13px !important;
+            width: auto !important;
+            justify-content: center !important;
           }
           .form-reset-btn {
-            height: 44px !important;
-            padding: 0 10px !important;
+            height: 42px !important;
+            padding: 0 14px !important;
             font-size: 12px !important;
+            width: auto !important;
+            justify-content: center !important;
           }
           .form-footer-right {
-            flex: 1 !important;
+            width: 100% !important;
           }
           .form-action-btn {
             width: 100% !important;
             justify-content: center !important;
-            height: 44px !important;
+            height: 46px !important;
             padding: 0 16px !important;
-            font-size: 13.5px !important;
+            font-size: 14px !important;
+            white-space: normal !important;
+            line-height: 1.25 !important;
+            text-align: center !important;
+            box-sizing: border-box !important;
           }
           .confirmation-reset-btn {
             width: 100% !important;
+            white-space: normal !important;
           }
         }
 
@@ -1617,6 +1633,10 @@ export default function AcquisitionBar() {
           .capsule-step-btn {
             font-size: 10.5px !important;
             padding: 6px 2px !important;
+          }
+          .form-action-btn {
+            font-size: 13px !important;
+            padding: 0 12px !important;
           }
         }
       `}</style>

@@ -266,26 +266,26 @@ export default function WhatsAppFloatingButton({
            ========================================================================= */
         @media (max-width: 640px) {
           .whatsapp-floating-container.pos-right {
-            bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+            bottom: calc(16px + env(safe-area-inset-bottom, 0px));
             right: calc(16px + env(safe-area-inset-right, 0px));
           }
 
           .whatsapp-floating-container.pos-left {
-            bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+            bottom: calc(16px + env(safe-area-inset-bottom, 0px));
             left: calc(16px + env(safe-area-inset-left, 0px));
           }
 
           .whatsapp-btn {
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             box-shadow:
-              0 8px 20px -2px rgba(37, 211, 102, 0.5),
-              0 4px 10px rgba(18, 140, 126, 0.25);
+              0 6px 16px -2px rgba(37, 211, 102, 0.45),
+              0 3px 8px rgba(18, 140, 126, 0.2);
           }
 
           .whatsapp-icon {
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
           }
 
           /* Never show hover tooltips on touch devices */
@@ -302,13 +302,13 @@ export default function WhatsAppFloatingButton({
           }
 
           .whatsapp-btn {
-            width: 52px;
-            height: 52px;
+            width: 44px;
+            height: 44px;
           }
 
           .whatsapp-icon {
-            width: 27px;
-            height: 27px;
+            width: 24px;
+            height: 24px;
           }
         }
       `}</style>

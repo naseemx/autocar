@@ -67,10 +67,18 @@ export default function BrandLogo({
 
         @media (max-width: 640px) {
           .brand-logo-text.md {
-            font-size: 19px !important;
+            font-size: 18px !important;
           }
           .brand-logo-text.lg {
-            font-size: 22px !important;
+            font-size: 21px !important;
+          }
+        }
+        @media (max-width: 400px) {
+          .brand-logo-text.md {
+            font-size: 16.5px !important;
+          }
+          .brand-logo-text.lg {
+            font-size: 19px !important;
           }
         }
       `}</style>

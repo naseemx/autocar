@@ -5,6 +5,7 @@ import { LanguageProvider } from "@/context/LanguageContext";
 import { LocationProvider } from "@/context/LocationContext";
 import { resolveLocation } from "@/utils/domainResolver";
 import WhatsAppFloatingButton from "@/components/WhatsAppFloatingButton";
+import PhoneFloatingButton from "@/components/PhoneFloatingButton";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -83,6 +84,7 @@ export default async function RootLayout({
         <LanguageProvider>
           <LocationProvider initialLocation={loc}>
             {children}
+            <PhoneFloatingButton />
             <WhatsAppFloatingButton />
           </LocationProvider>
         </LanguageProvider>

@@ -5,9 +5,12 @@ import { resolveLocation } from '@/utils/domainResolver';
 export function proxy(request: NextRequest) {
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || '';
   const searchParams = request.nextUrl.searchParams;
-  const locationParam = searchParams.get('location') || searchParams.get('city') || request.cookies.get('site_location')?.value;
+  const domainParam = searchParams.get('domain');
+  const locationParam = searchParams.get('location') || searchParams.get('city');
+  const cookieLocation = request.cookies.get('site_location')?.value;
+  const effectiveLocationParam = locationParam || cookieLocation;
 
-  const locConfig = resolveLocation(host, locationParam);
+  const locConfig = resolveLocation(host, effectiveLocationParam, domainParam);
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-current-domain', locConfig.domain);
@@ -25,13 +28,12 @@ export function proxy(request: NextRequest) {
   response.headers.set('x-location-slug', locConfig.slug);
   response.headers.set('x-location-name', locConfig.name);
 
-  if (locationParam) {
-    response.cookies.set('site_location', locConfig.slug, {
-      path: '/',
-      maxAge: 60 * 60 * 24 * 30, // 30 days
-      sameSite: 'lax',
-    });
-  }
+  // Sync cookie with current active domain slug
+  response.cookies.set('site_location', locConfig.slug, {
+    path: '/',
+    maxAge: 60 * 60 * 24 * 30, // 30 days
+    sameSite: 'lax',
+  });
 
   return response;
 }

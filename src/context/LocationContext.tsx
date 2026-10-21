@@ -42,26 +42,31 @@ export function LocationProvider({ children, initialLocation }: LocationProvider
   });
 
   useEffect(() => {
-    if (initialLocation) {
-      setLocationConfig(initialLocation);
-      setActiveLocationConfig(initialLocation);
-      return;
-    }
-
     if (typeof window !== 'undefined') {
       const hostname = window.location.hostname;
       const params = new URLSearchParams(window.location.search);
-      const locationParam = params.get('location') || params.get('city') || localStorage.getItem(STORAGE_KEY);
-      const resolved = resolveLocation(hostname, locationParam);
+      const domainParam = params.get('domain');
+      const locationParam = params.get('location') || params.get('city');
+
+      // Resolve based on current client hostname or query parameters
+      const resolved = resolveLocation(hostname, locationParam, domainParam);
       setLocationConfig(resolved);
       setActiveLocationConfig(resolved);
+
+      try {
+        localStorage.setItem(STORAGE_KEY, resolved.slug);
+      } catch {
+        // storage fallback
+      }
     }
   }, [initialLocation]);
 
   const setSelectedLocation = (query: string) => {
     if (typeof window !== 'undefined') {
       const hostname = window.location.hostname;
-      const resolved = resolveLocation(hostname, query);
+      const params = new URLSearchParams(window.location.search);
+      const domainParam = params.get('domain');
+      const resolved = resolveLocation(hostname, query, domainParam);
       setLocationConfig(resolved);
       setActiveLocationConfig(resolved);
       try {

@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useLanguage } from '@/context/LanguageContext';
+import { useLocation } from '@/context/LocationContext';
 import { TRANSLATIONS } from '@/data/translations';
 import { FORM_BRANDS as BRANDS } from '@/data/brands';
 import { getModelsForBrand } from '@/data/models';
@@ -105,6 +106,7 @@ const getMobileStepLabel = (stepId: number, lang: string) => {
 
 export default function AcquisitionBar() {
   const { language } = useLanguage();
+  const { displayLocation } = useLocation();
   const t = TRANSLATIONS[language].acquisition;
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);

@@ -15,15 +15,12 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const headersList = await headers();
-  const cookieStore = await cookies();
   const host =
     headersList.get("x-current-domain") ||
     headersList.get("x-forwarded-host") ||
     headersList.get("host") ||
     "autoankauf-in-koeln.de";
-  const locationSlug =
-    headersList.get("x-location-slug") ||
-    cookieStore.get("site_location")?.value;
+  const locationSlug = headersList.get("x-location-slug");
 
   const loc = resolveLocation(host, locationSlug);
 
@@ -51,15 +48,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const headersList = await headers();
-  const cookieStore = await cookies();
   const host =
     headersList.get("x-current-domain") ||
     headersList.get("x-forwarded-host") ||
     headersList.get("host") ||
     "autoankauf-in-koeln.de";
-  const locationSlug =
-    headersList.get("x-location-slug") ||
-    cookieStore.get("site_location")?.value;
+  const locationSlug = headersList.get("x-location-slug");
   const loc = resolveLocation(host, locationSlug);
 
   return (

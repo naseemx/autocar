@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
 import { useLanguage } from '@/context/LanguageContext';
+import { useLocation } from '@/context/LocationContext';
 import { TRANSLATIONS } from '@/data/translations';
 
 interface HeroSectionProps {
@@ -15,6 +16,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ onOpenInventory, onOpenCalculator }: HeroSectionProps) {
   const { language } = useLanguage();
+  const { displayLocation } = useLocation();
   const slides = TRANSLATIONS[language].hero.slides;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);

@@ -27,60 +27,173 @@ export interface LocationConfig {
 /**
  * Explicit mapping of domains to cities and regions
  */
-export const KNOWN_DOMAINS: Record<string, { city: string; cityEn: string; region: string; regionEn: string }> = {
+/**
+ * Explicit mapping of domains to cities, regions, slugs, and canonical domains
+ */
+export const KNOWN_DOMAINS: Record<
+  string,
+  { city: string; cityEn: string; region: string; regionEn: string; slug: string; primaryDomain: string }
+> = {
+  // Hamburg (autoankaufinhamburg.de)
   'autoankaufinhamburg.de': {
     city: 'Hamburg',
     cityEn: 'Hamburg',
+    slug: 'hamburg',
     region: 'Hamburg & Umgebung',
     regionEn: 'Hamburg and surrounding area',
+    primaryDomain: 'autoankaufinhamburg.de',
   },
+  'autoankauf-in-hamburg.de': {
+    city: 'Hamburg',
+    cityEn: 'Hamburg',
+    slug: 'hamburg',
+    region: 'Hamburg & Umgebung',
+    regionEn: 'Hamburg and surrounding area',
+    primaryDomain: 'autoankaufinhamburg.de',
+  },
+  'autoankaufhamburg.de': {
+    city: 'Hamburg',
+    cityEn: 'Hamburg',
+    slug: 'hamburg',
+    region: 'Hamburg & Umgebung',
+    regionEn: 'Hamburg and surrounding area',
+    primaryDomain: 'autoankaufinhamburg.de',
+  },
+  'auto-ankauf-hamburg.de': {
+    city: 'Hamburg',
+    cityEn: 'Hamburg',
+    slug: 'hamburg',
+    region: 'Hamburg & Umgebung',
+    regionEn: 'Hamburg and surrounding area',
+    primaryDomain: 'autoankaufinhamburg.de',
+  },
+
+  // Colonia (autoankaufcolonia.de)
   'autoankaufcolonia.de': {
     city: 'Colonia',
     cityEn: 'Colonia',
+    slug: 'colonia',
     region: 'Köln, Bonn & NRW',
     regionEn: 'Cologne, Bonn & NRW',
+    primaryDomain: 'autoankaufcolonia.de',
   },
+  'autoankauf-colonia.de': {
+    city: 'Colonia',
+    cityEn: 'Colonia',
+    slug: 'colonia',
+    region: 'Köln, Bonn & NRW',
+    regionEn: 'Cologne, Bonn & NRW',
+    primaryDomain: 'autoankaufcolonia.de',
+  },
+  'auto-ankauf-colonia.de': {
+    city: 'Colonia',
+    cityEn: 'Colonia',
+    slug: 'colonia',
+    region: 'Köln, Bonn & NRW',
+    regionEn: 'Cologne, Bonn & NRW',
+    primaryDomain: 'autoankaufcolonia.de',
+  },
+
+  // Köln (autoankauf-in-koeln.de)
   'autoankauf-in-koeln.de': {
     city: 'Köln',
     cityEn: 'Cologne',
+    slug: 'koeln',
     region: 'Köln & NRW',
     regionEn: 'Cologne & NRW',
+    primaryDomain: 'autoankauf-in-koeln.de',
   },
   'autoankauf-koeln.de': {
     city: 'Köln',
     cityEn: 'Cologne',
+    slug: 'koeln',
     region: 'Köln & NRW',
     regionEn: 'Cologne & NRW',
+    primaryDomain: 'autoankauf-in-koeln.de',
   },
+  'autoankaufkoeln.de': {
+    city: 'Köln',
+    cityEn: 'Cologne',
+    slug: 'koeln',
+    region: 'Köln & NRW',
+    regionEn: 'Cologne & NRW',
+    primaryDomain: 'autoankauf-in-koeln.de',
+  },
+  'autoankauf-in-köln.de': {
+    city: 'Köln',
+    cityEn: 'Cologne',
+    slug: 'koeln',
+    region: 'Köln & NRW',
+    regionEn: 'Cologne & NRW',
+    primaryDomain: 'autoankauf-in-koeln.de',
+  },
+  'autoankauf-köln.de': {
+    city: 'Köln',
+    cityEn: 'Cologne',
+    slug: 'koeln',
+    region: 'Köln & NRW',
+    regionEn: 'Cologne & NRW',
+    primaryDomain: 'autoankauf-in-koeln.de',
+  },
+
+  // München (autoankaufmünchen.de)
   'autoankaufmünchen.de': {
     city: 'München',
     cityEn: 'Munich',
+    slug: 'muenchen',
     region: 'München & Bayern',
     regionEn: 'Munich & Bavaria',
+    primaryDomain: 'autoankaufmünchen.de',
   },
   'autoankaufmuenchen.de': {
     city: 'München',
     cityEn: 'Munich',
+    slug: 'muenchen',
     region: 'München & Bayern',
     regionEn: 'Munich & Bavaria',
+    primaryDomain: 'autoankaufmünchen.de',
   },
   'xn--autoankaufmnchen-tzb.de': {
     city: 'München',
     cityEn: 'Munich',
+    slug: 'muenchen',
     region: 'München & Bayern',
     regionEn: 'Munich & Bavaria',
+    primaryDomain: 'autoankaufmünchen.de',
   },
+  'auto-ankauf-muenchen.de': {
+    city: 'München',
+    cityEn: 'Munich',
+    slug: 'muenchen',
+    region: 'München & Bayern',
+    regionEn: 'Munich & Bavaria',
+    primaryDomain: 'autoankaufmünchen.de',
+  },
+
+  // Rostock (auto-ankauf-rostock.de)
   'auto-ankauf-rostock.de': {
     city: 'Rostock',
     cityEn: 'Rostock',
+    slug: 'rostock',
     region: 'Rostock & Mecklenburg-Vorpommern',
     regionEn: 'Rostock and surrounding area',
+    primaryDomain: 'auto-ankauf-rostock.de',
   },
   'autoankaufrostock.de': {
     city: 'Rostock',
     cityEn: 'Rostock',
+    slug: 'rostock',
     region: 'Rostock & Mecklenburg-Vorpommern',
     regionEn: 'Rostock and surrounding area',
+    primaryDomain: 'auto-ankauf-rostock.de',
+  },
+  'autoankauf-rostock.de': {
+    city: 'Rostock',
+    cityEn: 'Rostock',
+    slug: 'rostock',
+    region: 'Rostock & Mecklenburg-Vorpommern',
+    regionEn: 'Rostock and surrounding area',
+    primaryDomain: 'auto-ankauf-rostock.de',
   },
 };
 
@@ -161,6 +274,86 @@ export const DEFAULT_LOCATION_CONFIG: LocationConfig = {
 };
 
 /**
+ * Dedicated location configuration for Colonia
+ */
+export const COLONIA_LOCATION_CONFIG: LocationConfig = {
+  name: 'Colonia',
+  nameEn: 'Colonia',
+  slug: 'colonia',
+  region: 'Köln, Bonn & NRW',
+  regionEn: 'Cologne, Bonn & NRW',
+  domain: 'autoankaufcolonia.de',
+  canonicalUrl: 'https://autoankaufcolonia.de',
+  brandName: 'Autoankauf Colonia',
+  brandLogoLocation: 'Colonia',
+  phone: '+4915207107540',
+  email: 'kontakt@autoankaufcolonia.de',
+  keywordsEn: generateLocationKeywords('Colonia', 'Colonia').en,
+  keywordsDe: generateLocationKeywords('Colonia', 'Colonia').de,
+  seoKeywords: generateLocationKeywords('Colonia', 'Colonia').combined,
+};
+
+/**
+ * Dedicated location configuration for Hamburg
+ */
+export const HAMBURG_LOCATION_CONFIG: LocationConfig = {
+  name: 'Hamburg',
+  nameEn: 'Hamburg',
+  slug: 'hamburg',
+  region: 'Hamburg & Umgebung',
+  regionEn: 'Hamburg and surrounding area',
+  domain: 'autoankaufinhamburg.de',
+  canonicalUrl: 'https://autoankaufinhamburg.de',
+  brandName: 'Autoankauf Hamburg',
+  brandLogoLocation: 'Hamburg',
+  phone: '+4915207107540',
+  email: 'kontakt@autoankaufinhamburg.de',
+  keywordsEn: generateLocationKeywords('Hamburg', 'Hamburg').en,
+  keywordsDe: generateLocationKeywords('Hamburg', 'Hamburg').de,
+  seoKeywords: generateLocationKeywords('Hamburg', 'Hamburg').combined,
+};
+
+/**
+ * Dedicated location configuration for München
+ */
+export const MUENCHEN_LOCATION_CONFIG: LocationConfig = {
+  name: 'München',
+  nameEn: 'Munich',
+  slug: 'muenchen',
+  region: 'München & Bayern',
+  regionEn: 'Munich & Bavaria',
+  domain: 'autoankaufmünchen.de',
+  canonicalUrl: 'https://autoankaufmünchen.de',
+  brandName: 'Autoankauf München',
+  brandLogoLocation: 'München',
+  phone: '+4915207107540',
+  email: 'kontakt@autoankaufmuenchen.de',
+  keywordsEn: generateLocationKeywords('München', 'Munich').en,
+  keywordsDe: generateLocationKeywords('München', 'Munich').de,
+  seoKeywords: generateLocationKeywords('München', 'Munich').combined,
+};
+
+/**
+ * Dedicated location configuration for Rostock
+ */
+export const ROSTOCK_LOCATION_CONFIG: LocationConfig = {
+  name: 'Rostock',
+  nameEn: 'Rostock',
+  slug: 'rostock',
+  region: 'Rostock & Mecklenburg-Vorpommern',
+  regionEn: 'Rostock and surrounding area',
+  domain: 'auto-ankauf-rostock.de',
+  canonicalUrl: 'https://auto-ankauf-rostock.de',
+  brandName: 'Autoankauf Rostock',
+  brandLogoLocation: 'Rostock',
+  phone: '+4915207107540',
+  email: 'kontakt@auto-ankauf-rostock.de',
+  keywordsEn: generateLocationKeywords('Rostock', 'Rostock').en,
+  keywordsDe: generateLocationKeywords('Rostock', 'Rostock').de,
+  seoKeywords: generateLocationKeywords('Rostock', 'Rostock').combined,
+};
+
+/**
  * Clean hostname to extract pure domain (remove port, http, www)
  */
 export function normalizeHost(host: string): string {
@@ -184,7 +377,7 @@ export function normalizeHost(host: string): string {
 function findLocationItem(query: string) {
   const q = query.toLowerCase().trim();
   if (!q) return undefined;
-  if (q === 'cologne' || q === 'colonia') {
+  if (q === 'cologne') {
     return LOCATION_ITEMS.find((l) => l.slug === 'koeln');
   }
   const qNormalized = q
@@ -218,23 +411,108 @@ function findLocationItem(query: string) {
 }
 
 /**
- * Primary resolver: takes incoming request hostname and optional location query/cookie,
- * and produces the exact LocationConfig with canonical URL and keywords.
+ * Primary resolver: takes incoming request hostname, optional location query/cookie,
+ * and optional domain override.
+ *
+ * Domain priority:
+ * 1. If incoming host/domain is one of the 5 explicit domains, that domain ALWAYS determines
+ *    the identity and city (cookies or location queries CANNOT override a domain's identity).
+ * 2. On localhost / preview deployments, explicit domain parameter (?domain=...) or location parameter
+ *    (?location=... / ?city=...) can be used to preview each domain.
+ * 3. Default fallback is Köln (autoankauf-in-koeln.de).
  */
-export function resolveLocation(host?: string | null, locationParam?: string | null): LocationConfig {
-  const cleanHost = normalizeHost(host || '');
+export function resolveLocation(
+  host?: string | null,
+  locationParam?: string | null,
+  domainOverride?: string | null
+): LocationConfig {
+  const rawTarget = domainOverride || host || '';
+  const cleanHost = normalizeHost(rawTarget);
 
-  // 1. If explicit location override is provided via ?location= or cookie (useful for preview/testing)
+  // 1. Direct Known Domain dictionary match (Highest priority)
+  if (cleanHost && KNOWN_DOMAINS[cleanHost]) {
+    const known = KNOWN_DOMAINS[cleanHost];
+    const kw = generateLocationKeywords(known.city, known.cityEn);
+    const activeDomain = known.primaryDomain || cleanHost;
+
+    return {
+      name: known.city,
+      nameEn: known.cityEn,
+      slug: known.slug,
+      region: known.region,
+      regionEn: known.regionEn,
+      domain: activeDomain,
+      canonicalUrl: `https://${activeDomain}`,
+      brandName: `Autoankauf ${known.city}`,
+      brandLogoLocation: known.city,
+      phone: '+4915207107540',
+      email: `kontakt@${activeDomain}`,
+      keywordsEn: kw.en,
+      keywordsDe: kw.de,
+      seoKeywords: kw.combined,
+    };
+  }
+
+  // 2. Substring & keyword matching in hostname for the 5 target domains
+  if (cleanHost && !cleanHost.includes('localhost') && !cleanHost.includes('127.0.0.1')) {
+    // Colonia: autoankaufcolonia.de
+    if (cleanHost.includes('colonia')) {
+      return COLONIA_LOCATION_CONFIG;
+    }
+
+    // Hamburg: autoankaufinhamburg.de
+    if (cleanHost.includes('hamburg')) {
+      return HAMBURG_LOCATION_CONFIG;
+    }
+
+    // München: autoankaufmünchen.de, autoankaufmuenchen.de, punycode mnchen
+    if (
+      cleanHost.includes('münchen') ||
+      cleanHost.includes('muenchen') ||
+      cleanHost.includes('mnchen') ||
+      cleanHost.includes('tzb')
+    ) {
+      return MUENCHEN_LOCATION_CONFIG;
+    }
+
+    // Rostock: auto-ankauf-rostock.de
+    if (cleanHost.includes('rostock')) {
+      return ROSTOCK_LOCATION_CONFIG;
+    }
+
+    // Köln: autoankauf-in-koeln.de, autoankauf-koeln.de
+    if (cleanHost.includes('koeln') || cleanHost.includes('cologne') || cleanHost.includes('köln')) {
+      return DEFAULT_LOCATION_CONFIG;
+    }
+  }
+
+  // 3. Testing & preview overrides: if on localhost / preview, or explicit query parameter passed
   if (locationParam) {
+    const q = locationParam.toLowerCase().trim();
+
+    if (q === 'colonia') {
+      return COLONIA_LOCATION_CONFIG;
+    }
+    if (q === 'hamburg') {
+      return HAMBURG_LOCATION_CONFIG;
+    }
+    if (q === 'muenchen' || q === 'münchen' || q === 'munich') {
+      return MUENCHEN_LOCATION_CONFIG;
+    }
+    if (q === 'rostock') {
+      return ROSTOCK_LOCATION_CONFIG;
+    }
+    if (q === 'koeln' || q === 'cologne' || q === 'köln') {
+      return DEFAULT_LOCATION_CONFIG;
+    }
+
+    // Search broader 101 German cities
     const locItem = findLocationItem(locationParam);
     if (locItem) {
       const city = locItem.deName || locItem.name;
       const cityEn = locItem.name;
       const slug = locItem.slug;
-      const activeDomain = cleanHost.includes('.') && !cleanHost.includes('localhost') && !cleanHost.includes('vercel.app')
-        ? cleanHost
-        : `autoankauf-${slug}.de`;
-
+      const activeDomain = `autoankauf-${slug}.de`;
       const kw = generateLocationKeywords(city, cityEn);
       const isKoeln = slug === 'koeln';
 
@@ -257,142 +535,6 @@ export function resolveLocation(host?: string | null, locationParam?: string | n
     }
   }
 
-  // 2. Check known domain dictionary
-  if (cleanHost && KNOWN_DOMAINS[cleanHost]) {
-    const known = KNOWN_DOMAINS[cleanHost];
-    const locItem = findLocationItem(known.city) || findLocationItem(known.cityEn);
-    const slug = locItem?.slug || 'koeln';
-    const kw = generateLocationKeywords(known.city, known.cityEn);
-
-    return {
-      name: known.city,
-      nameEn: known.cityEn,
-      slug,
-      region: known.region,
-      regionEn: known.regionEn,
-      domain: cleanHost,
-      canonicalUrl: `https://${cleanHost}`,
-      brandName: `Autoankauf ${known.city}`,
-      brandLogoLocation: known.city,
-      phone: '+4915207107540',
-      email: `kontakt@${cleanHost}`,
-      keywordsEn: kw.en,
-      keywordsDe: kw.de,
-      seoKeywords: kw.combined,
-    };
-  }
-
-  // 3. Check if hostname contains any city slug or name
-  if (cleanHost) {
-    // Check specific known patterns: e.g. "colonia" -> Colonia / Cologne
-    if (cleanHost.includes('colonia')) {
-      const kwColonia = generateLocationKeywords('Colonia', 'Colonia');
-      const kwKoeln = generateLocationKeywords('Köln', 'Cologne');
-      const combinedDe = Array.from(new Set([...kwColonia.de, ...kwKoeln.de]));
-      const combinedEn = Array.from(new Set([...kwColonia.en, ...kwKoeln.en]));
-      return {
-        name: 'Colonia',
-        nameEn: 'Colonia',
-        slug: 'koeln',
-        region: 'Köln, Bonn & NRW',
-        regionEn: 'Cologne, Bonn & NRW',
-        domain: cleanHost,
-        canonicalUrl: `https://${cleanHost}`,
-        brandName: 'Autoankauf Colonia',
-        brandLogoLocation: 'Colonia',
-        phone: '+4915207107540',
-        email: `kontakt@${cleanHost}`,
-        keywordsEn: combinedEn,
-        keywordsDe: combinedDe,
-        seoKeywords: [...combinedDe, ...combinedEn],
-      };
-    }
-
-    if (cleanHost.includes('koeln') || cleanHost.includes('cologne')) {
-      const kw = generateLocationKeywords('Köln', 'Cologne');
-      return {
-        name: 'Köln',
-        nameEn: 'Cologne',
-        slug: 'koeln',
-        region: 'Köln & NRW',
-        regionEn: 'Cologne & NRW',
-        domain: cleanHost,
-        canonicalUrl: `https://${cleanHost}`,
-        brandName: 'Autoankauf Köln',
-        brandLogoLocation: 'Köln',
-        phone: '+4915207107540',
-        email: `kontakt@${cleanHost}`,
-        keywordsEn: kw.en,
-        keywordsDe: kw.de,
-        seoKeywords: kw.combined,
-      };
-    }
-
-    // Check München patterns (umlauts, ue, punycode mnchen)
-    if (cleanHost.includes('münchen') || cleanHost.includes('muenchen') || cleanHost.includes('mnchen')) {
-      const kw = generateLocationKeywords('München', 'Munich');
-      return {
-        name: 'München',
-        nameEn: 'Munich',
-        slug: 'muenchen',
-        region: 'München & Bayern',
-        regionEn: 'Munich & Bavaria',
-        domain: cleanHost,
-        canonicalUrl: `https://${cleanHost}`,
-        brandName: 'Autoankauf München',
-        brandLogoLocation: 'München',
-        phone: '+4915207107540',
-        email: `kontakt@${cleanHost}`,
-        keywordsEn: kw.en,
-        keywordsDe: kw.de,
-        seoKeywords: kw.combined,
-      };
-    }
-
-    const cleanHostNormalized = cleanHost
-      .replace(/[-_.]/g, '')
-      .replace(/ü/g, 'ue')
-      .replace(/ä/g, 'ae')
-      .replace(/ö/g, 'oe')
-      .replace(/ß/g, 'ss');
-
-    // Check against all 101 cities
-    for (const loc of LOCATION_ITEMS) {
-      const slugPattern = loc.slug.replace(/-/g, '');
-      const deNamePattern = (loc.deName || '').toLowerCase().replace(/[-_.]/g, '')
-        .replace(/ü/g, 'ue').replace(/ä/g, 'ae').replace(/ö/g, 'oe');
-      const namePattern = loc.name.toLowerCase().replace(/[-_.]/g, '');
-
-      if (
-        cleanHostNormalized.includes(slugPattern) ||
-        (deNamePattern && cleanHostNormalized.includes(deNamePattern)) ||
-        cleanHostNormalized.includes(namePattern)
-      ) {
-        const city = loc.deName || loc.name;
-        const cityEn = loc.name;
-        const kw = generateLocationKeywords(city, cityEn);
-        const isKoeln = loc.slug === 'koeln';
-
-        return {
-          name: city,
-          nameEn: cityEn,
-          slug: loc.slug,
-          region: isKoeln ? 'Köln & NRW' : `${city} & Umgebung`,
-          regionEn: isKoeln ? 'Cologne & NRW' : `${cityEn} and surrounding area`,
-          domain: cleanHost,
-          canonicalUrl: `https://${cleanHost}`,
-          brandName: `Autoankauf ${city}`,
-          brandLogoLocation: city,
-          phone: '+4915207107540',
-          email: `kontakt@${cleanHost}`,
-          keywordsEn: kw.en,
-          keywordsDe: kw.de,
-          seoKeywords: kw.combined,
-        };
-      }
-    }
-  }
-
-  // 4. Default fallback: Köln
+  // 4. Default fallback: Köln (autoankauf-in-koeln.de)
   return DEFAULT_LOCATION_CONFIG;
 }

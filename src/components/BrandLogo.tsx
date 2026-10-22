@@ -22,64 +22,105 @@ export default function BrandLogo({
 
   return (
     <span
-      className={`brand-logo-text ${size} ${variant} ${className}`}
+      className={`brand-logo-text size-${size} variant-${variant} ${className}`}
       style={{
         display: 'inline-flex',
         alignItems: 'baseline',
+        justifyContent: 'center',
         gap: '6px',
         fontFamily: 'var(--font-sans)',
-        fontWeight: 800,
+        fontWeight: 900,
+        fontStyle: 'italic',
         letterSpacing: '-0.03em',
         lineHeight: 1,
         whiteSpace: 'nowrap',
+        textTransform: 'uppercase',
         userSelect: 'none',
-        transition: 'opacity 0.2s ease, transform 0.2s ease',
+        flexShrink: 0,
+        position: 'relative',
+        cursor: 'pointer',
+        transition: 'transform 0.2s ease, opacity 0.2s ease',
       }}
     >
+      {/* 1. Main Brand Text */}
       <span
+        className="brand-logo-main"
         style={{
           color: isLight ? '#FFFFFF' : '#002f61',
           letterSpacing: '-0.035em',
+          transition: 'color 0.2s ease',
         }}
       >
         Autoankauf
       </span>
+
+      {/* 2. Dynamic City / Location Text */}
       <span
+        className="brand-logo-loc"
         style={{
           color: '#ff8f00',
-          fontWeight: 700,
-          letterSpacing: '-0.02em',
+          fontWeight: 900,
+          letterSpacing: '-0.025em',
         }}
       >
         {loc}
       </span>
 
       <style jsx>{`
-        .brand-logo-text.md {
-          font-size: 22px;
-        }
-        .brand-logo-text.lg {
-          font-size: 25px;
-        }
-        .brand-logo-text.sm {
-          font-size: 18px;
+        /* ===================================================================
+           TEXT LOGO RESPONSIVE SIZING ENGINE
+           Desktop prominent bold size matching kauf-auto.de typography
+           Optimized for iPhone, Android, Tablets, Desktop
+           =================================================================== */
+
+        /* --- Default Medium Size (Header) --- */
+        .brand-logo-text.size-md {
+          font-size: 27px;
         }
 
-        @media (max-width: 640px) {
-          .brand-logo-text.md {
-            font-size: 18px !important;
+        /* --- Large Size (Footer) --- */
+        .brand-logo-text.size-lg {
+          font-size: 30px;
+        }
+
+        /* --- Small Size --- */
+        .brand-logo-text.size-sm {
+          font-size: 19px;
+        }
+
+        /* Tablets (iPad portrait/landscape, Android tablets: 768px - 1024px) */
+        @media (max-width: 1024px) {
+          .brand-logo-text.size-md {
+            font-size: 23px;
+            gap: 5px;
           }
-          .brand-logo-text.lg {
-            font-size: 21px !important;
+          .brand-logo-text.size-lg {
+            font-size: 26px;
           }
         }
-        @media (max-width: 400px) {
-          .brand-logo-text.md {
-            font-size: 16.5px !important;
+
+        /* Mobile Phones: iPhones & Android (max-width: 640px) */
+        @media (max-width: 640px) {
+          .brand-logo-text.size-md {
+            font-size: 19.5px !important;
+            gap: 4px;
           }
-          .brand-logo-text.lg {
-            font-size: 19px !important;
+          .brand-logo-text.size-lg {
+            font-size: 22px !important;
           }
+        }
+
+        /* Extra Small Phones (iPhone SE, Galaxy Fold: max-width: 380px) */
+        @media (max-width: 380px) {
+          .brand-logo-text.size-md {
+            font-size: 17.5px !important;
+            gap: 3.5px;
+          }
+        }
+
+        .brand-logo-text:hover {
+          opacity: 0.95;
+          transform: translateY(-0.5px);
         }
       `}</style>
     </span>

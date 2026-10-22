@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Phone } from 'lucide-react';
 
 // =========================================================================
 // 📞 PHONE CONFIGURATION
@@ -24,6 +25,12 @@ export default function PhoneFloatingButton({
   return (
     <div
       className={`phone-floating-container ${isLeft ? 'pos-left' : 'pos-right'}`}
+      style={{
+        position: 'fixed',
+        zIndex: 9991,
+        display: 'flex',
+        alignItems: 'center',
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -47,19 +54,23 @@ export default function PhoneFloatingButton({
         className="phone-btn"
         aria-label="Telefonisch kontaktieren"
         title="Anrufen"
+        style={{
+          borderRadius: '9999px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'linear-gradient(145deg, #ffb300 0%, #ff8f00 45%, #e65100 100%)',
+          color: '#ffffff',
+          textDecoration: 'none',
+        }}
       >
-        <svg
-          viewBox="0 0 24 24"
+        <Phone
+          size={25}
+          color="#ffffff"
+          strokeWidth={2.4}
           className="phone-icon"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 5.87 5.87l1.92-1.92a2 2 0 0 1 2.11-.45c.91.33 1.85.56 2.81.69A2 2 0 0 1 22 16.92z" />
-        </svg>
+          style={{ display: 'block', flexShrink: 0 }}
+        />
       </a>
 
       <style jsx>{`
@@ -74,13 +85,13 @@ export default function PhoneFloatingButton({
         }
 
         .phone-floating-container.pos-right {
-          bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+          bottom: calc(92px + env(safe-area-inset-bottom, 0px));
           right: calc(24px + env(safe-area-inset-right, 0px));
           flex-direction: row-reverse;
         }
 
         .phone-floating-container.pos-left {
-          bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+          bottom: calc(92px + env(safe-area-inset-bottom, 0px));
           left: calc(24px + env(safe-area-inset-left, 0px));
           flex-direction: row;
         }
@@ -107,8 +118,8 @@ export default function PhoneFloatingButton({
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 60px;
-          height: 60px;
+          width: 56px;
+          height: 56px;
           border-radius: 9999px;
           background: linear-gradient(145deg, #ffb300 0%, #ff8f00 45%, #e65100 100%);
           color: #ffffff;
@@ -218,11 +229,11 @@ export default function PhoneFloatingButton({
 
         @media (max-width: 640px) {
           .phone-floating-container.pos-right {
-            bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+            bottom: calc(74px + env(safe-area-inset-bottom, 0px));
             right: calc(16px + env(safe-area-inset-right, 0px));
           }
           .phone-floating-container.pos-left {
-            bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+            bottom: calc(74px + env(safe-area-inset-bottom, 0px));
             left: calc(16px + env(safe-area-inset-left, 0px));
           }
           .phone-btn {
@@ -240,12 +251,16 @@ export default function PhoneFloatingButton({
 
         @media (max-width: 380px) {
           .phone-floating-container.pos-right {
-            bottom: calc(68px + env(safe-area-inset-bottom, 0px));
-            right: calc(14px + env(safe-area-inset-right, 0px));
+            bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+            right: calc(12px + env(safe-area-inset-right, 0px));
+          }
+          .phone-floating-container.pos-left {
+            bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+            left: calc(12px + env(safe-area-inset-left, 0px));
           }
           .phone-btn {
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
           }
           .phone-icon {
             width: 19px;

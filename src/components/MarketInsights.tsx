@@ -82,11 +82,12 @@ export default function MarketInsights() {
                 fontSize: '44px',
                 fontWeight: 800,
                 letterSpacing: '-0.035em',
-                lineHeight: '1.15',
+                lineHeight: '1.18',
                 color: '#0B0D12',
                 maxWidth: '820px',
                 margin: 0,
-                whiteSpace: 'pre-line',
+                wordBreak: 'break-word',
+                overflowWrap: 'break-word',
               }}
               className="insights-heading"
             >
@@ -265,10 +266,19 @@ export default function MarketInsights() {
         }
         @media (max-width: 960px) {
           .insights-heading {
-            font-size: 32px !important;
+            font-size: 30px !important;
           }
           .insight-card {
             flex: 0 0 300px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .insights-heading {
+            font-size: 24px !important;
+            line-height: 1.22 !important;
+          }
+          .insight-card {
+            flex: 0 0 270px !important;
           }
         }
       `}</style>

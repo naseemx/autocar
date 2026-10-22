@@ -50,8 +50,10 @@ export function LocationProvider({ children, initialLocation }: LocationProvider
 
       // Resolve based on current client hostname or query parameters
       const resolved = resolveLocation(hostname, locationParam, domainParam);
-      setLocationConfig(resolved);
-      setActiveLocationConfig(resolved);
+      if (resolved.slug !== locationConfig.slug || resolved.domain !== locationConfig.domain) {
+        setLocationConfig(resolved);
+        setActiveLocationConfig(resolved);
+      }
 
       try {
         localStorage.setItem(STORAGE_KEY, resolved.slug);
@@ -59,7 +61,7 @@ export function LocationProvider({ children, initialLocation }: LocationProvider
         // storage fallback
       }
     }
-  }, [initialLocation]);
+  }, [initialLocation, locationConfig.slug, locationConfig.domain]);
 
   const setSelectedLocation = (query: string) => {
     if (typeof window !== 'undefined') {

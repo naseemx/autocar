@@ -34,7 +34,7 @@
   --radius-card: 22px;
   --radius-pill: 9999px;
   
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 * {
@@ -262,3 +262,339 @@ input, select {
 ::-webkit-scrollbar-thumb:hover {
   background: #a0a6b2;
 }
+
+/* =========================================================================
+   NAVBAR & HEADER RESPONSIVE ENGINE (CROSS-DEVICE: IPHONE, ANDROID, TABLET, DESKTOP)
+   Ensures logo size is prominent matching kauf-auto.de and prevents any overlap
+   ========================================================================= */
+
+.header-logo-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  text-decoration: none !important;
+  flex-shrink: 0 !important;
+  min-width: max-content !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+.desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 22px;
+  white-space: nowrap;
+}
+
+.header-main-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: nowrap !important;
+}
+
+.header-right-group {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  flex-wrap: nowrap !important;
+}
+
+.desktop-contact-group {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  flex-wrap: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.nav-contact-pill {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+.desktop-location-badge {
+  display: none;
+  white-space: nowrap;
+  flex-shrink: 0 !important;
+}
+
+.mobile-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.mobile-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  color: #11141B;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* Wide Desktop Screens (>= 1240px) */
+@media (min-width: 1240px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+  .desktop-contact-group {
+    display: flex !important;
+  }
+  .desktop-location-badge {
+    display: inline-flex !important;
+  }
+  .lang-switcher-nav {
+    display: inline-flex !important;
+  }
+  .mobile-quick-actions {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: none !important;
+  }
+}
+
+/* Standard Desktop Screens (1140px - 1239px) */
+@media (min-width: 1140px) and (max-width: 1239px) {
+  .desktop-nav {
+    display: flex !important;
+    gap: 16px !important;
+  }
+  .desktop-contact-group {
+    display: flex !important;
+  }
+  .desktop-location-badge {
+    display: none !important;
+  }
+  .lang-switcher-nav {
+    display: inline-flex !important;
+  }
+  .mobile-quick-actions {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: none !important;
+  }
+}
+
+/* Tablets, iPads, Small Laptops & Android Chrome Desktop Mode (< 1140px) */
+/* Strictly hides .desktop-nav so it can NEVER collide with the logo */
+@media (max-width: 1139px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .desktop-contact-group {
+    display: none !important;
+  }
+  .desktop-location-badge {
+    display: none !important;
+  }
+  .mobile-quick-actions {
+    display: flex !important;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+
+/* Tablets (768px - 1139px) - Keep language switcher in header if space permits */
+@media (min-width: 768px) and (max-width: 1139px) {
+  .lang-switcher-nav {
+    display: inline-flex !important;
+  }
+}
+
+/* Mobile Devices (iPhone & Android: <= 767px) */
+@media (max-width: 767px) {
+  .lang-switcher-nav {
+    display: none !important;
+  }
+  .header-main-row {
+    height: 66px !important;
+    padding-left: max(16px, env(safe-area-inset-left)) !important;
+    padding-right: max(16px, env(safe-area-inset-right)) !important;
+  }
+}
+
+/* Extra Small Phones (iPhone SE, Galaxy Fold: <= 380px) */
+@media (max-width: 380px) {
+  .header-main-row {
+    height: 62px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  .header-right-group {
+    gap: 6px !important;
+  }
+  .mobile-quick-actions {
+    gap: 6px !important;
+  }
+  .mobile-quick-btn {
+    width: 33px !important;
+    height: 33px !important;
+  }
+}
+
+/* =========================================================================
+   CRITICAL CONTAINER CONTAINMENT (PREVENTS FOUC / FULL-SCREEN IMAGE EXPANSION)
+   ========================================================================= */
+
+.hero-section-root {
+  position: relative;
+  width: 100%;
+  padding: 12px 0 24px 0;
+}
+
+.hero-container {
+  position: relative !important;
+  background-color: #07090E !important;
+  border-radius: 32px !important;
+  overflow: hidden !important;
+  min-height: 540px !important;
+  width: 100% !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.hero-image-wrapper {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  z-index: 0 !important;
+}
+
+.hero-bg-image {
+  object-fit: cover !important;
+  object-position: center right !important;
+}
+
+.lifestyle-banner-container {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 450px !important;
+  border-radius: 32px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  background-color: #0b0d12 !important;
+}
+
+.lifestyle-bg-image {
+  object-fit: cover !important;
+  object-position: center 40% !important;
+}
+
+/* Floating contact buttons - fixed positioning from first frame */
+.phone-floating-container,
+.whatsapp-floating-container {
+  position: fixed !important;
+  right: calc(24px + env(safe-area-inset-right, 0px)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.whatsapp-floating-container {
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px)) !important;
+  z-index: 9990 !important;
+}
+
+.phone-floating-container {
+  bottom: calc(92px + env(safe-area-inset-bottom, 0px)) !important;
+  z-index: 9991 !important;
+}
+
+.phone-btn,
+.whatsapp-btn {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 9999px !important;
+}
+
+.phone-icon {
+  width: 25px !important;
+  height: 25px !important;
+}
+
+.whatsapp-icon {
+  width: 27px !important;
+  height: 27px !important;
+}
+
+@media (max-width: 640px) {
+  .whatsapp-floating-container {
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+  }
+  .phone-floating-container {
+    bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+    right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+  }
+  .phone-btn,
+  .whatsapp-btn {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  .phone-icon {
+    width: 21px !important;
+    height: 21px !important;
+  }
+  .whatsapp-icon {
+    width: 23px !important;
+    height: 23px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .whatsapp-floating-container {
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px)) !important;
+    right: calc(12px + env(safe-area-inset-right, 0px)) !important;
+  }
+  .phone-floating-container {
+    bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
+    right: calc(12px + env(safe-area-inset-right, 0px)) !important;
+  }
+  .phone-btn,
+  .whatsapp-btn {
+    width: 42px !important;
+    height: 42px !important;
+  }
+  .phone-icon {
+    width: 19px !important;
+    height: 19px !important;
+  }
+  .whatsapp-icon {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
+/* Header layout rules from first paint */
+.desktop-contact-group {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-quick-actions {
+  display: none;
+}
+
+@media (max-width: 1139px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .desktop-contact-group {
+    display: none !important;
+  }
+  .mobile-quick-actions {
+    display: flex !important;
+  }
+}
+
+

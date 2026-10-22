@@ -270,7 +270,7 @@ export default function ExperienceAndHeartSection() {
                   src="https://res.cloudinary.com/dymoyukvh/image/upload/v1790760679/kauf-auto/images/handshake-experience-heart.png"
                   alt="Dealer handshake and car key handover with experience and heart"
                   fill
-                  priority
+                  loading="lazy"
                   sizes="(max-width: 960px) 100vw, 50vw"
                   style={{
                     objectFit: 'cover',

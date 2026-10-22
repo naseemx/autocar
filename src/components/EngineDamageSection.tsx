@@ -78,8 +78,9 @@ export default function EngineDamageSection() {
                 lineHeight: 1.2,
                 color: '#0B0D12',
                 textTransform: 'uppercase',
-                margin: '0 0 24px 0',
-                whiteSpace: 'pre-line',
+                margin: '0 0 20px 0',
+                wordBreak: 'break-word',
+                overflowWrap: 'break-word',
               }}
               className="engine-main-title"
             >
@@ -185,7 +186,7 @@ export default function EngineDamageSection() {
                 alt="Car with engine damage"
                 width={1536}
                 height={1024}
-                priority
+                loading="lazy"
                 sizes="(max-width: 960px) 100vw, 50vw"
                 style={{
                   width: '100%',
@@ -209,13 +210,23 @@ export default function EngineDamageSection() {
         @media (max-width: 960px) {
           .engine-damage-grid {
             grid-template-columns: 1fr !important;
-            gap: 40px !important;
+            gap: 36px !important;
           }
           .engine-main-title {
             font-size: 28px !important;
           }
           .engine-car-wrapper {
             max-width: 100% !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .engine-damage-grid {
+            gap: 24px !important;
+          }
+          .engine-main-title {
+            font-size: 24px !important;
+            line-height: 1.22 !important;
           }
         }
       `}</style>

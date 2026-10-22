@@ -398,6 +398,31 @@ export default function BetterAlternativeSection() {
             height: 480px !important;
           }
         }
+
+        @media (max-width: 640px) {
+          .about-main-title {
+            font-size: 24px !important;
+          }
+          .about-image-card {
+            height: 440px !important;
+            border-radius: 20px !important;
+          }
+          .glass-content-card {
+            bottom: 12px !important;
+            left: 12px !important;
+            right: 12px !important;
+            padding: 16px !important;
+            border-radius: 16px !important;
+            gap: 8px !important;
+          }
+          .glass-content-card h3 {
+            font-size: 16px !important;
+          }
+          .glass-content-card p {
+            font-size: 12.5px !important;
+            line-height: 1.5 !important;
+          }
+        }
       `}</style>
     </section>
   );

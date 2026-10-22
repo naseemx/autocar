@@ -16,8 +16,14 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const STORAGE_KEY = 'kauf_auto_language_v2';
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('DE'); // German default for Autoankauf Köln
+export function LanguageProvider({
+  children,
+  initialLanguage = 'DE',
+}: {
+  children: ReactNode;
+  initialLanguage?: Language;
+}) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage);
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -25,9 +31,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       const savedLang = localStorage.getItem(STORAGE_KEY) as Language | null;
       if (savedLang === 'EN' || savedLang === 'DE') {
         setLanguageState(savedLang);
-      } else {
-        // Default to German when website opens
-        setLanguageState('DE');
       }
     } catch {
       // localStorage unavailable fallback
@@ -39,6 +42,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLanguageState(lang);
     try {
       localStorage.setItem(STORAGE_KEY, lang);
+      document.cookie = `site_language=${lang}; path=/; max-age=31536000; SameSite=Lax`;
     } catch {
       // safe fallback
     }

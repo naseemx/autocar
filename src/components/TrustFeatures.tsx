@@ -161,6 +161,10 @@ export default function TrustFeatures() {
       </div>
 
       <style jsx>{`
+        .feature-card {
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
         .feature-card:hover {
           transform: translateY(-2px);
           box-shadow: 0 10px 25px -4px rgba(0, 0, 0, 0.08);
@@ -168,7 +172,14 @@ export default function TrustFeatures() {
         @media (max-width: 960px) {
           .features-grid {
             grid-template-columns: 1fr !important;
-            gap: 16px !important;
+            gap: 14px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .feature-card {
+            padding: 18px 16px !important;
+            border-radius: 16px !important;
+            gap: 12px !important;
           }
         }
       `}</style>

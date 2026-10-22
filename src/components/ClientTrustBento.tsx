@@ -613,9 +613,9 @@ export default function ClientTrustBento() {
             textAlign: 'center',
             overflow: 'hidden',
           }}
-        >
-          {/* Giant Background Watermark "AUTOANKAUF KÖLN" */}
+        >          {/* Giant Background Watermark "AUTOANKAUF KÖLN" */}
           <div
+            className="bento-watermark"
             style={{
               position: 'absolute',
               top: '52%',
@@ -655,6 +655,10 @@ export default function ClientTrustBento() {
       </div>
 
       <style jsx>{`
+        .bento-card {
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
         .bento-card:hover {
           transform: translateY(-4px);
         }
@@ -673,7 +677,7 @@ export default function ClientTrustBento() {
           border-radius: 50%;
           display: flex;
           align-items: center;
-          justifyContent: center;
+          justify-content: center;
           transition: all 0.2s ease;
           cursor: pointer;
         }
@@ -705,6 +709,9 @@ export default function ClientTrustBento() {
           .bento-main-title {
             font-size: 32px !important;
           }
+          .bento-watermark {
+            display: none !important;
+          }
         }
 
         @media (max-width: 640px) {
@@ -713,6 +720,11 @@ export default function ClientTrustBento() {
           }
           .bento-main-title {
             font-size: 26px !important;
+          }
+          .bento-card {
+            padding: 24px 20px !important;
+            border-radius: 20px !important;
+            min-height: auto !important;
           }
         }
       `}</style>

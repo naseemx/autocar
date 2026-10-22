@@ -370,7 +370,19 @@ export default function Testimonials() {
             transform: none !important;
           }
           .testimonials-title {
-            font-size: 32px !important;
+            font-size: 30px !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
+          }
+        }
+        @media (max-width: 640px) {
+          .testimonials-title {
+            font-size: 24px !important;
+            line-height: 1.2 !important;
+          }
+          .center-featured-card {
+            padding: 24px 18px !important;
+            border-radius: 20px !important;
           }
         }
       `}</style>

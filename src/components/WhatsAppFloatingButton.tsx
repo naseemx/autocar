@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 // =========================================================================
 // 📱 WHATSAPP CONFIGURATION
@@ -52,6 +53,12 @@ export default function WhatsAppFloatingButton({
   return (
     <div
       className={`whatsapp-floating-container ${isLeft ? 'pos-left' : 'pos-right'}`}
+      style={{
+        position: 'fixed',
+        zIndex: 9990,
+        display: 'flex',
+        alignItems: 'center',
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -77,16 +84,23 @@ export default function WhatsAppFloatingButton({
         className="whatsapp-btn"
         aria-label="Auf WhatsApp kontaktieren"
         title="WhatsApp Chat"
+        style={{
+          borderRadius: '9999px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'linear-gradient(145deg, #2fe675 0%, #25D366 45%, #128C7E 100%)',
+          color: '#ffffff',
+          textDecoration: 'none',
+        }}
       >
-        {/* Official WhatsApp Vector Logo */}
-        <svg
-          viewBox="0 0 32 32"
+        {/* Authentic WhatsApp Icon */}
+        <WhatsAppIcon
+          size={27}
+          color="#ffffff"
           className="whatsapp-icon"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M16 2C8.28 2 2 8.28 2 16c0 2.68.75 5.18 2.05 7.33L2 30l6.89-1.99C11.02 29.28 13.44 30 16 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.55c-2.34 0-4.52-.66-6.38-1.81l-.46-.28-4.73 1.36 1.37-4.6-.3-.48C4.24 19.82 3.55 17.97 3.55 16c0-6.86 5.59-12.45 12.45-12.45s12.45 5.59 12.45 12.45-5.59 12.45-12.45 12.45zm6.83-9.33c-.37-.19-2.22-1.09-2.56-1.22-.35-.12-.6-.19-.85.19s-.98 1.22-1.2 1.47c-.22.25-.45.28-.82.09-.37-.19-1.57-.58-2.99-1.84-1.11-.99-1.86-2.21-2.07-2.58-.22-.37-.02-.57.16-.75.17-.17.37-.45.56-.67.19-.22.25-.37.37-.62.12-.25.06-.47-.03-.66-.09-.19-.85-2.05-1.17-2.81-.31-.74-.63-.64-.85-.65h-.73c-.25 0-.66.09-1 .47-.35.37-1.33 1.3-1.33 3.17s1.36 3.68 1.55 3.93c.19.25 2.68 4.09 6.49 5.73.91.39 1.61.63 2.16.81.91.29 1.74.25 2.4.15.73-.11 2.22-.91 2.53-1.78.31-.88.31-1.63.22-1.78-.09-.16-.34-.25-.71-.44z" />
-        </svg>
+          style={{ display: 'block', flexShrink: 0 }}
+        />
       </a>
 
       <style jsx>{`
@@ -145,8 +159,8 @@ export default function WhatsAppFloatingButton({
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 60px;
-          height: 60px;
+          width: 56px;
+          height: 56px;
           border-radius: 9999px;
           background: linear-gradient(145deg, #2fe675 0%, #25D366 45%, #128C7E 100%);
           color: #ffffff;
@@ -297,18 +311,22 @@ export default function WhatsAppFloatingButton({
         /* Extra small phones (< 380px) */
         @media (max-width: 380px) {
           .whatsapp-floating-container.pos-right {
-            bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-            right: calc(14px + env(safe-area-inset-right, 0px));
+            bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+            right: calc(12px + env(safe-area-inset-right, 0px));
+          }
+          .whatsapp-floating-container.pos-left {
+            bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+            left: calc(12px + env(safe-area-inset-left, 0px));
           }
 
           .whatsapp-btn {
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
           }
 
           .whatsapp-icon {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
           }
         }
       `}</style>

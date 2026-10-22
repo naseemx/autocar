@@ -1258,8 +1258,9 @@ export default function AcquisitionBar() {
           align-items: center;
           justify-content: center;
           gap: 8px;
-          height: 46px;
-          padding: 0 14px;
+          min-height: 46px;
+          height: auto;
+          padding: 8px 12px;
           border-radius: 12px;
           font-size: 13px;
           font-weight: 600;
@@ -1268,6 +1269,9 @@ export default function AcquisitionBar() {
           border: 1.5px solid #E2E8F0;
           transition: all 0.15s ease;
           cursor: pointer;
+          text-align: center;
+          line-height: 1.25;
+          word-break: break-word;
         }
 
         .category-tab-btn:hover {
@@ -1504,7 +1508,7 @@ export default function AcquisitionBar() {
 
         @media (max-width: 640px) {
           .acquisition-root {
-            margin-top: -38px;
+            margin-top: -30px;
           }
           .acquisition-inner-wrapper {
             padding: 0;

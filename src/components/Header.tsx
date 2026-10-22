@@ -9,6 +9,7 @@ import {
   MapPin,
   Phone,
 } from 'lucide-react';
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 import { useLanguage } from '@/context/LanguageContext';
 import { useLocation } from '@/context/LocationContext';
 import BrandLogo from '@/components/BrandLogo';
@@ -20,22 +21,6 @@ import { TRANSLATIONS } from '@/data/translations';
 const PHONE_NUMBER = '+4915207107540';
 const PHONE_DISPLAY = '+49 1520 7107540';
 const WHATSAPP_LINK = 'https://wa.me/4915207107540?text=Hallo!%20Ich%20interessiere%20mich%20f%C3%BCr%20den%20Autoankauf.';
-
-function WhatsAppIcon({ size = 16, color = '#25D366' }: { size?: number; color?: string }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 32 32"
-      fill={color}
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ flexShrink: 0, display: 'block' }}
-      aria-hidden="true"
-    >
-      <path d="M16 2C8.28 2 2 8.28 2 16c0 2.68.75 5.18 2.05 7.33L2 30l6.89-1.99C11.02 29.28 13.44 30 16 30c7.72 0 14-6.28 14-14S23.72 2 16 2zm0 25.55c-2.34 0-4.52-.66-6.38-1.81l-.46-.28-4.73 1.36 1.37-4.6-.3-.48C4.24 19.82 3.55 17.97 3.55 16c0-6.86 5.59-12.45 12.45-12.45s12.45 5.59 12.45 12.45-5.59 12.45-12.45 12.45zm6.83-9.33c-.37-.19-2.22-1.09-2.56-1.22-.35-.12-.6-.19-.85.19s-.98 1.22-1.2 1.47c-.22.25-.45.28-.82.09-.37-.19-1.57-.58-2.99-1.84-1.11-.99-1.86-2.21-2.07-2.58-.22-.37-.02-.57.16-.75.17-.17.37-.45.56-.67.19-.22.25-.37.37-.62.12-.25.06-.47-.03-.66-.09-.19-.85-2.05-1.17-2.81-.31-.74-.63-.64-.85-.65h-.73c-.25 0-.66.09-1 .47-.35.37-1.33 1.3-1.33 3.17s1.36 3.68 1.55 3.93c.19.25 2.68 4.09 6.49 5.73.91.39 1.61.63 2.16.81.91.29 1.74.25 2.4.15.73-.11 2.22-.91 2.53-1.78.31-.88.31-1.63.22-1.78-.09-.16-.34-.25-.71-.44z" />
-    </svg>
-  );
-}
 
 interface HeaderProps {
   onOpenCalculator: () => void;
@@ -85,7 +70,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
           height: '76px',
         }}
       >
-        {/* Logo */}
+        {/* Logo (Flex shrink 0 to guarantee it never collapses or overlaps) */}
         <Link
           href="/"
           onClick={(e) => {
@@ -94,25 +79,30 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
               scrollToTop();
             }
           }}
+          className="header-logo-link"
           style={{
-            display: 'flex',
+            display: 'inline-flex',
             alignItems: 'center',
             textDecoration: 'none',
-            minWidth: 0,
-            flexShrink: 1,
+            flexShrink: 0,
+            minWidth: 'max-content',
+            position: 'relative',
+            zIndex: 10,
           }}
+          aria-label="Autoankauf Startseite"
         >
           <BrandLogo variant="dark" size="md" />
         </Link>
 
-        {/* Desktop Navigation Links: Home, What We Buy, About Us, Counselor, Contact */}
+        {/* Desktop Navigation Links: Home, What We Buy, About Us, Counselor, Contact (Visible >= 1140px only) */}
         <nav
           style={{
-            display: 'none',
             alignItems: 'center',
-            gap: '24px',
+            gap: 'clamp(14px, 1.6vw, 24px)',
+            margin: '0 clamp(10px, 1.8vw, 28px)',
           }}
           className="desktop-nav"
+          aria-label="Hauptnavigation"
         >
           {/* 1. Home */}
           <button
@@ -208,17 +198,41 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
             alignItems: 'center',
             gap: '10px',
             flexShrink: 0,
+            flexWrap: 'nowrap',
           }}
         >
           {/* Desktop Direct Contact Pills: Phone & WhatsApp */}
-          <div className="desktop-contact-group">
+          <div
+            className="desktop-contact-group"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              flexWrap: 'nowrap',
+              flexShrink: 0,
+            }}
+          >
             {/* Phone Button */}
             <a
               href={`tel:${PHONE_NUMBER}`}
               className="nav-contact-pill nav-phone-pill"
               title={`Telefon: ${PHONE_DISPLAY}`}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '7px 12px',
+                borderRadius: '9999px',
+                fontSize: '13px',
+                fontWeight: 600,
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                backgroundColor: '#F8FAFC',
+                border: '1px solid #E2E8F0',
+                color: '#0F172A',
+              }}
             >
-              <Phone size={13} color="#ff8f00" strokeWidth={2.4} />
+              <Phone size={13} color="#ff8f00" strokeWidth={2.4} style={{ width: 13, height: 13, flexShrink: 0 }} />
               <span className="nav-phone-text">{PHONE_DISPLAY}</span>
             </a>
 
@@ -229,8 +243,22 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
               rel="noopener noreferrer"
               className="nav-contact-pill nav-wa-pill"
               title={`WhatsApp: ${PHONE_DISPLAY}`}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '7px 12px',
+                borderRadius: '9999px',
+                fontSize: '13px',
+                fontWeight: 600,
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                backgroundColor: '#F0FDF4',
+                border: '1px solid #BBF7D0',
+                color: '#15803D',
+              }}
             >
-              <WhatsAppIcon size={14} color="#25D366" />
+              <WhatsAppIcon size={14} color="#25D366" style={{ width: 14, height: 14, flexShrink: 0 }} />
               <span className="nav-wa-text">WhatsApp</span>
             </a>
           </div>
@@ -326,7 +354,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
               title={`WhatsApp: ${PHONE_DISPLAY}`}
               aria-label="WhatsApp Chat"
             >
-              <WhatsAppIcon size={16} color="#FFFFFF" />
+              <WhatsAppIcon size={16} color="#FFFFFF" style={{ width: 16, height: 16, flexShrink: 0 }} />
             </a>
           </div>
 
@@ -464,7 +492,7 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
                     flexShrink: 0,
                   }}
                 >
-                  <WhatsAppIcon size={18} color="#FFFFFF" />
+                  <WhatsAppIcon size={18} color="#FFFFFF" style={{ width: 18, height: 18, flexShrink: 0 }} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <span
@@ -747,7 +775,10 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
           box-shadow: 0 2px 6px rgba(37, 211, 102, 0.3);
         }
 
-        @media (min-width: 960px) {
+        /* --- Responsive Breakpoints (Cross-Device Optimization) --- */
+
+        /* Wide & Standard Desktop (>= 1140px): Show full nav, contact pills, and hide mobile buttons */
+        @media (min-width: 1140px) {
           .desktop-nav {
             display: flex !important;
           }
@@ -757,47 +788,63 @@ export default function Header({ onOpenCalculator }: HeaderProps) {
           .mobile-quick-actions {
             display: none !important;
           }
+          .mobile-menu-btn {
+            display: none !important;
+          }
         }
 
-        @media (max-width: 1240px) and (min-width: 960px) {
+        /* Wide Desktop Only (>= 1240px): Show location badge */
+        @media (max-width: 1239px) {
           .desktop-location-badge {
             display: none !important;
           }
         }
 
-        @media (max-width: 959px) {
-          .mobile-menu-btn {
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-          }
-          .desktop-location-badge {
+        /* Tablets, iPads & Phone Desktop Mode (< 1140px): Strictly hide desktop nav to PREVENT ANY OVERLAP */
+        @media (max-width: 1139px) {
+          .desktop-nav {
             display: none !important;
           }
           .desktop-contact-group {
             display: none !important;
           }
-          .lang-switcher-nav {
+          .desktop-location-badge {
             display: none !important;
+          }
+          .mobile-menu-btn {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+          }
+          .mobile-quick-actions {
+            display: flex !important;
           }
           .header-right-group {
             gap: 8px !important;
           }
         }
 
-        @media (max-width: 640px) {
+        /* Mobile Devices (iPhone & Android: <= 767px): Hide top lang switcher and adjust row height */
+        @media (max-width: 767px) {
+          .lang-switcher-nav {
+            display: none !important;
+          }
           .header-main-row {
-            height: 62px !important;
+            height: 66px !important;
           }
         }
 
+        /* Extra Small Phones (iPhone SE, Galaxy Fold: <= 380px) */
         @media (max-width: 380px) {
+          .header-main-row {
+            height: 62px !important;
+          }
           .header-right-group {
             gap: 6px !important;
           }
           .mobile-quick-btn {
-            width: 31px !important;
-            height: 31px !important;
+            width: 33px !important;
+            height: 33px !important;
           }
         }
       `}</style>

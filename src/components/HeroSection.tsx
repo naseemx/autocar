@@ -20,16 +20,22 @@ export default function HeroSection({ onOpenInventory, onOpenCalculator }: HeroS
   const slides = TRANSLATIONS[language].hero.slides;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
-  // Subtle auto-advance every 8 seconds, paused on hover
+  // Mount detection: ensures autoplay timers and transitions start only after client mount
   useEffect(() => {
-    if (isPaused) return;
+    setIsMounted(true);
+  }, []);
+
+  // Autoplay auto-advance every 8 seconds, paused on hover, starts ONLY after mount
+  useEffect(() => {
+    if (!isMounted || isPaused) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 8000);
     return () => clearInterval(timer);
-  }, [isPaused, slides.length]);
+  }, [isMounted, isPaused, slides.length]);
 
   const handleCta = () => {
     if (onOpenInventory) {
@@ -71,40 +77,74 @@ export default function HeroSection({ onOpenInventory, onOpenCalculator }: HeroS
   return (
     <section
       className="hero-section-root"
+      style={{
+        position: 'relative',
+        width: '100%',
+        padding: '12px 0 24px 0',
+      }}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
       <div className="container-app">
-        {/* Main Curved Hero Card Shape */}
-        <div className="hero-container">
-          {/* 1. Full-size Card Shape Background Image with Smooth Crossfade */}
-          <div className="hero-image-wrapper">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={slide.id}
-                initial={{ opacity: 0, scale: 1.04 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                }}
-              >
-                <Image
-                  src={slide.carImage}
-                  alt={slide.title}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"
-                  className="hero-bg-image"
-                />
-              </motion.div>
-            </AnimatePresence>
+        {/* Main Curved Hero Card Shape - Rigid inline containment prevents any collapse */}
+        <div
+          className="hero-container"
+          style={{
+            position: 'relative',
+            overflow: 'hidden',
+            width: '100%',
+            minHeight: '540px',
+            backgroundColor: '#07090E',
+            borderRadius: '32px',
+          }}
+        >
+          {/* 1. Full-size Card Shape Background Image Container */}
+          <div
+            className="hero-image-wrapper"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              overflow: 'hidden',
+              zIndex: 0,
+            }}
+          >
+            {slides.map((s, index) => {
+              const isActive = index === currentSlide;
+              return (
+                <div
+                  key={s.id}
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    opacity: isActive ? 1 : 0,
+                    pointerEvents: isActive ? 'auto' : 'none',
+                    transition: isMounted ? 'opacity 0.6s ease-in-out' : 'none',
+                    zIndex: isActive ? 1 : 0,
+                  }}
+                  aria-hidden={!isActive}
+                >
+                  <Image
+                    src={s.carImage}
+                    alt={s.title}
+                    fill
+                    priority={index === 0}
+                    loading={index === 0 ? undefined : 'lazy'}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"
+                    className="hero-bg-image"
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center right',
+                    }}
+                  />
+                </div>
+              );
+            })}
           </div>
 
           {/* 2. Gradient Scrim & Overlays for Text Contrast */}
@@ -138,7 +178,7 @@ export default function HeroSection({ onOpenInventory, onOpenCalculator }: HeroS
             <AnimatePresence mode="wait">
               <motion.div
                 key={slide.id}
-                initial={{ opacity: 0, x: -20 }}
+                initial={isMounted ? { opacity: 0, x: -20 } : false}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.35, ease: 'easeOut' }}
@@ -202,7 +242,7 @@ export default function HeroSection({ onOpenInventory, onOpenCalculator }: HeroS
           border-radius: 32px;
           overflow: hidden;
           min-height: 540px;
-          padding: 40px 48px 100px 48px;
+          padding: 40px 48px 112px 48px;
           color: #FFFFFF;
           box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.45);
           border: 1px solid rgba(255, 255, 255, 0.08);
@@ -456,7 +496,7 @@ export default function HeroSection({ onOpenInventory, onOpenCalculator }: HeroS
             padding: 12px 0 0 0 !important;
           }
           .hero-container {
-            padding: 20px 16px 70px 16px !important;
+            padding: 20px 16px 86px 16px !important;
             min-height: auto !important;
             border-radius: 20px !important;
           }
@@ -472,6 +512,8 @@ export default function HeroSection({ onOpenInventory, onOpenCalculator }: HeroS
             line-height: 1.2 !important;
             margin-bottom: 14px !important;
             letter-spacing: -0.025em !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
           }
           .hero-highlight-break {
             display: inline;
@@ -480,6 +522,8 @@ export default function HeroSection({ onOpenInventory, onOpenCalculator }: HeroS
             font-size: 14px !important;
             line-height: 1.5 !important;
             margin-bottom: 20px !important;
+            word-break: break-word;
+            overflow-wrap: break-word;
           }
           .hero-cta-group {
             flex-direction: column !important;
@@ -512,7 +556,7 @@ export default function HeroSection({ onOpenInventory, onOpenCalculator }: HeroS
 
         @media (max-width: 420px) {
           .hero-container {
-            padding: 18px 14px 65px 14px !important;
+            padding: 18px 14px 78px 14px !important;
             border-radius: 18px !important;
           }
           .hero-title {

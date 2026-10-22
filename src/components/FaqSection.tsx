@@ -28,12 +28,7 @@ export default function FaqSection() {
           textAlign: 'center',
           marginBottom: '50px',
         }}>
-          <h2 style={{
-            fontSize: '56px',
-            fontWeight: 900,
-            letterSpacing: '-0.04em',
-            color: '#0B0D12',
-          }}>
+          <h2 className="faq-main-title">
             {t.title}
           </h2>
           <p style={{
@@ -177,13 +172,28 @@ export default function FaqSection() {
       </div>
 
       <style jsx>{`
+        .faq-main-title {
+          font-size: 52px;
+          font-weight: 900;
+          letter-spacing: -0.04em;
+          color: #0B0D12;
+          word-break: break-word;
+        }
         @media (max-width: 768px) {
+          .faq-main-title {
+            font-size: 36px !important;
+          }
           .faq-header-btn {
-            padding: 20px 18px !important;
-            gap: 16px !important;
+            padding: 18px 16px !important;
+            gap: 14px !important;
           }
           .faq-answer-inner {
-            padding: 0 18px 20px 18px !important;
+            padding: 0 16px 18px 16px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .faq-main-title {
+            font-size: 28px !important;
           }
         }
       `}</style>

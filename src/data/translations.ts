@@ -148,7 +148,7 @@ export function getTranslations(lang: Language, customLoc?: LocationConfig) {
         body: `At Autoankauf ${loc.name}, your trusted car buying service in ${city}, we provide vehicle owners with a simple, secure, and transparent way to sell used car ${city}. Whether you need a used car buying service ${city}, passenger car buying service ${city}, or car buying service ${city} without TÜV — our vehicle buying service ${city} ensures fair guaranteed valuations, free doorstep collection across ${city} and surrounding area, immediate payout, and hassle-free deregistration.`,
       },
       lifestyleBanner: {
-        heading: `Sell car ${city} — \nFast, fair & directly on-site`,
+        heading: `Sell car ${city} – Fast, fair & directly on-site`,
         paragraph: `Need to sell car immediately ${city}? Our car buying service ${city} and surrounding area specializes in passenger car buying service ${city}, used cars, and accident vehicles.`,
         cta: 'Get your free offer',
         badgeTitle: `Free car buying service ${city} with pickup`,
@@ -225,7 +225,7 @@ export function getTranslations(lang: Language, customLoc?: LocationConfig) {
         eyebrow: 'Engine Damage Solution',
         titleP1: `Car buying service ${city} `,
         titleHighlight: 'engine damage',
-        titleP2: ' – \nFinding a fair solution',
+        titleP2: ' – Finding a fair solution',
         p1Text1: `When you need to `,
         p1Bold1: `sell car ${city} with engine failure`,
         p1Text2: ', the frustration is usually immense – and we understand that. Repair shops often charge prices far exceeding the actual ',
@@ -271,7 +271,7 @@ export function getTranslations(lang: Language, customLoc?: LocationConfig) {
       },
       marketInsights: {
         eyebrow: `Autoankauf ${loc.name} Blog & Guides`,
-        heading: `Expert car selling advice in ${city}, \ntips & guides: our official blog`,
+        heading: `Expert car selling advice in ${city}, tips & guides: our official blog`,
         readArticle: 'Read Article →',
       },
       testimonials: {
@@ -512,7 +512,7 @@ export function getTranslations(lang: Language, customLoc?: LocationConfig) {
       body: `Bei Autoankauf ${city}, Ihrem verlässlichen Partner für Autoankauf in ${city}, bieten wir Fahrzeughaltern ein einfaches, sicheres und transparentes Verkaufserlebnis. Dank unseres professionellen Gebrauchtwagen Ankauf ${city} müssen Sie sich keine Sorgen um bürokratischen Papierkram machen. Ob Sie einen Gebrauchtwagen verkaufen in ${city}, einen schnellen PKW Ankauf ${city} suchen oder einen Autoankauf ${city} ohne TÜV wünschen – unser Fahrzeugankauf ${city} garantiert faire Bestpreise, kostenlose Vor-Ort-Abholung in ganz ${region}, Sofortauszahlung und die amtliche Abmeldung.`,
     },
     lifestyleBanner: {
-      heading: `Auto verkaufen ${city} — \nSchnell, fair & vor Ort`,
+      heading: `Auto verkaufen ${city} – Schnell, fair & vor Ort`,
       paragraph: `Möchten Sie Ihr Auto sofort verkaufen in ${city}? Unser Autoankauf ${city} und Umgebung ist Ihr Spezialist für PKW Ankauf ${city}, Gebrauchtwagen und Fahrzeuge mit Motorschaden.`,
       cta: 'Kostenloses Angebot anfordern',
       badgeTitle: `Kostenloser Autoankauf ${city} mit Abholung`,
@@ -589,7 +589,7 @@ export function getTranslations(lang: Language, customLoc?: LocationConfig) {
       eyebrow: 'Lösung bei Motorschaden',
       titleP1: `Autoankauf ${city} `,
       titleHighlight: 'Motorschaden',
-      titleP2: ' – \nEine faire Lösung finden',
+      titleP2: ' – Eine faire Lösung finden',
       p1Text1: `Wenn Sie ein `,
       p1Bold1: `Auto mit Motorschaden verkaufen in ${city}`,
       p1Text2: ' müssen, ist der Frust meist riesig – und das können wir gut verstehen. Werkstätten verlangen oft Summen, die den tatsächlichen ',
@@ -635,7 +635,7 @@ export function getTranslations(lang: Language, customLoc?: LocationConfig) {
     },
     marketInsights: {
       eyebrow: `Autoankauf ${city} Ratgeber & Blog`,
-      heading: `Expertenratgeber für den Autoverkauf in ${city}: \nTipps, Analysen & Praxisguides`,
+      heading: `Expertenratgeber für den Autoverkauf in ${city}: Tipps, Analysen & Praxisguides`,
       readArticle: 'Artikel lesen →',
     },
     testimonials: {

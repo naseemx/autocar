@@ -320,7 +320,7 @@ export default function NationwideAcquisition() {
                 src="https://res.cloudinary.com/dymoyukvh/image/upload/v1790760692/kauf-auto/images/how-it-works-suv.jpg"
                 alt="Luxury White SUV on Scenic Canyon Highway"
                 fill
-                priority
+                loading="lazy"
                 sizes="(max-width: 960px) 100vw, 50vw"
                 style={{
                   objectFit: 'cover',
@@ -334,6 +334,10 @@ export default function NationwideAcquisition() {
 
       {/* Scoped CSS for Hover Transitions & Responsive Layout */}
       <style jsx>{`
+        .acquisition-main-title {
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
         .learn-more-link:hover {
           color: #002f61 !important;
           gap: 10px !important;
@@ -342,7 +346,7 @@ export default function NationwideAcquisition() {
         @media (max-width: 960px) {
           .acquisition-grid {
             grid-template-columns: 1fr !important;
-            gap: 48px !important;
+            gap: 40px !important;
           }
           .acquisition-main-title {
             font-size: 30px !important;
@@ -352,7 +356,21 @@ export default function NationwideAcquisition() {
             gap: 24px !important;
           }
           .visual-container {
-            height: 420px !important;
+            height: 380px !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .acquisition-grid {
+            gap: 28px !important;
+          }
+          .acquisition-main-title {
+            font-size: 24px !important;
+            line-height: 1.22 !important;
+          }
+          .visual-container {
+            height: 280px !important;
+            border-radius: 20px !important;
           }
         }
       `}</style>
